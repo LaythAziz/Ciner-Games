@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CINER Games - أخبار وتحديثات الألعاب</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --accent-color: #38bdf8;
+            --text-color: #f8fafc;
+            --text-muted: #94a3b8;
+            --danger: #f43f5e;
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        header {
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            border-bottom: 1px solid #334155;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--accent-color);
+            letter-spacing: 1px;
+        }
+        .logo span {
+            color: var(--text-color);
+        }
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            margin-left: 20px;
+            transition: color 0.3s;
+            font-weight: 600;
+        }
+        nav a:hover {
+            color: var(--accent-color);
+        }
+        .hero {
+            text-align: center;
+            padding: 4rem 1rem;
+            background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1200&q=80') center/cover;
+            border-bottom: 1px solid #334155;
+        }
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            border-right: 4px solid var(--accent-color);
+            padding-right: 10px;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #334155;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(56, 189, 248, 0.1);
+        }
+        .card-img {
+            height: 180px;
+            background-color: #334155;
+            background-size: cover;
+            background-position: center;
+        }
+        .card-content {
+            padding: 1.5rem;
+        }
+        .tag {
+            display: inline-block;
+            background-color: rgba(56, 189, 248, 0.1);
+            color: var(--accent-color);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        .card-title {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--text-color);
+        }
+        .card-text {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: #0f172a;
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: opacity 0.3s;
+        }
+        .btn:hover {
+            opacity: 0.9;
+        }
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: #0b1120;
+            color: var(--text-muted);
+            border-top: 1px solid #334155;
+            margin-top: 4rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">CINER <span>Games</span></div>
+        <nav>
+            <a href="#">الرئيسية</a>
+            <a href="#">الأخبار</a>
+            <a href="#">الأكواد</a>
+            <a href="#">التسريبات</a>
+        </nav>
+    </header>
+
+    <div class="hero">
+        <h1>عالم الألعاب بين يديك</h1>
+        <p>تابع أحدث أخبار الألعاب، المواعيد، التسريبات، وأكواد الهدايا الحصرية لحظة بلحظة.</p>
+    </div>
+
+    <div class="container">
+        <h2 class="section-title">أبرز الأخبار والتحديثات</h2>
+        
+        <div class="grid">
+            <!-- المقال الأول -->
+            <div class="card">
+                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=600&q=80');"></div>
+                <div class="card-content">
+                    <span class="tag">تسريبات كبرى</span>
+                    <h3 class="card-title">كل ما ترغب بمعرفته عن موعد إصدار GTA VI</h3>
+                    <p class="card-text">تزايد الترقب العالمي للعبة الأبزر في تاريخ الصناعة مع تفاصيل جديدة حول الخريطة وقصّة لوسيا وجايسون.</p>
+                    <a href="#" class="btn">اقرأ المزيد</a>
+                </div>
+            </div>
+
+            <!-- المقال الثاني -->
+            <div class="card">
+                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=600&q=80');"></div>
+                <div class="card-content">
+                    <span class="tag">أكواد وجوائز</span>
+                    <h3 class="card-title">أحدث أكواد وهدايا الألعاب المجانية (تحديث أسبوعي)</h3>
+                    <p class="card-text">احصل على أحدث الأكواد الفعّالة لشحن الهدايا والسكنات لأشهر الألعاب وتأكد من استخدامها قبل انتهاء صلاحيتها.</p>
+                    <a href="#" class="btn">عرض الأكواد</a>
+                </div>
+            </div>
+
+            <!-- المقال الثالث -->
+            <div class="card">
+                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1612287233002-ef2f8149e19d?auto=format&fit=crop&w=600&q=80');"></div>
+                <div class="card-content">
+                    <span class="tag">مواعيد الإصدار</span>
+                    <h3 class="card-title">أقوى الإصدارات القادمة هذا الشهر</h3>
+                    <p class="card-text">قائمة شاملة بأبرز الألعاب المنتظرة على منصات الحاسب والكونسول مع تواريخ الإطلاق الدقيقة.</p>
+                    <a href="#" class="btn">التعرف على الجدول</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 CINER Games. جميع الحقوق محفوظة.</p>
+    </footer>
+
+</body>
+</html>
