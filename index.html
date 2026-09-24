@@ -3,39 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CINER Games - المنصة العالمية للألعاب والبثوث الحية</title>
+    <title>CINER PLATFORM - المنصة العالمية للألعاب والبثوث</title>
     <style>
         :root {
-            --bg-color: #05070f;
-            --card-bg: #0d1322;
-            --accent-neon: #00f0ff;
-            --accent-purple: #7000ff;
-            --text-color: #f1f5f9;
-            --text-muted: #94a3b8;
-            --danger: #ff0055;
-            --success: #00ff66;
-            --border-glow: rgba(0, 240, 255, 0.2);
-            --live-red: #ff3333;
+            --bg-primary: #080b11;
+            --bg-surface: #111827;
+            --bg-glass: rgba(17, 24, 39, 0.7);
+            --accent: #6366f1;
+            --accent-glow: rgba(99, 102, 241, 0.4);
+            --neon-cyan: #06b6d4;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --danger: #ef4444;
+            --success: #10b981;
+            --border-color: rgba(255, 255, 255, 0.08);
         }
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
             scroll-behavior: smooth;
         }
         body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            min-height: 100vh;
             overflow-x: hidden;
         }
-        /* Top Navigation Bar */
+
+        /* شاشة تسجيل الدخول الإجبارية (Gated Auth Screen) */
+        #authScreen {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at center, #1e1b4b 0%, #080b11 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            padding: 1.5rem;
+        }
+        .auth-card {
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 2.5rem;
+            width: 100%;
+            max-width: 440px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+            text-align: center;
+        }
+        .auth-logo {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--neon-cyan);
+            margin-bottom: 0.5rem;
+            letter-spacing: 2px;
+        }
+        .auth-card input {
+            width: 100%;
+            padding: 14px 16px;
+            margin: 10px 0;
+            background: rgba(3, 7, 18, 0.6);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        .auth-card input:focus {
+            border-color: var(--accent);
+            outline: none;
+            box-shadow: 0 0 15px var(--accent-glow);
+        }
+        .btn-main {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, var(--accent), var(--neon-cyan));
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+            box-shadow: 0 10px 20px -5px var(--accent-glow);
+        }
+        .btn-main:hover {
+            transform: translateY(-2px);
+            opacity: 0.95;
+        }
+
+        /* المحتوى الأساسي للمنصة (مخفي حتى يتم تسجيل الدخول) */
+        #platformContent {
+            display: none;
+        }
+
+        /* Navbar */
         header {
-            background: rgba(5, 7, 15, 0.9);
+            background: var(--bg-glass);
             backdrop-filter: blur(15px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            padding: 0.9rem 2rem;
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 2.5rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -43,129 +114,99 @@
             top: 0;
             z-index: 1000;
         }
-        .logo {
-            font-size: 1.7rem;
+        .nav-logo {
+            font-size: 1.5rem;
             font-weight: 900;
-            color: var(--accent-neon);
+            color: var(--neon-cyan);
             cursor: pointer;
             letter-spacing: 1px;
-            text-shadow: 0 0 10px rgba(0, 240, 255, 0.4);
-            display: flex;
-            align-items: center;
-            gap: 6px;
         }
-        .logo span { color: #ffffff; }
-        nav {
+        .nav-links {
             display: flex;
+            gap: 25px;
             align-items: center;
-            gap: 20px;
-            overflow-x: auto;
         }
-        nav::-webkit-scrollbar { display: none; }
-        nav a {
+        .nav-links a {
             color: var(--text-muted);
             text-decoration: none;
-            transition: all 0.3s ease;
             font-weight: 600;
             font-size: 0.95rem;
-            white-space: nowrap;
+            transition: color 0.3s;
         }
-        nav a:hover {
-            color: var(--accent-neon);
-            text-shadow: 0 0 8px var(--accent-neon);
-        }
-        .user-action-area {
+        .nav-links a:hover { color: var(--neon-cyan); }
+        .user-profile-badge {
             display: flex;
             align-items: center;
             gap: 12px;
-        }
-        .btn-glow {
-            background: linear-gradient(135deg, var(--accent-neon), var(--accent-purple));
-            color: #05070f;
-            border: none;
-            padding: 8px 18px;
+            background: rgba(255,255,255,0.04);
+            padding: 6px 14px;
             border-radius: 50px;
-            font-weight: bold;
+            border: 1px solid var(--border-color);
             cursor: pointer;
-            font-size: 0.85rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
-            white-space: nowrap;
+            transition: 0.3s;
         }
-        .btn-glow:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 25px rgba(0, 240, 255, 0.6);
-        }
+        .user-profile-badge:hover { border-color: var(--accent); }
 
         /* Hero Section */
-        .hero {
+        .platform-hero {
+            padding: 5rem 2rem;
             text-align: center;
-            padding: 6rem 1rem;
-            background: linear-gradient(180deg, rgba(5,7,15,0.6) 0%, var(--bg-color) 100%), url('https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1400&q=80') center/cover;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            position: relative;
+            background: linear-gradient(180deg, rgba(99,102,241,0.08) 0%, transparent 100%);
+            border-bottom: 1px solid var(--border-color);
         }
-        .hero h1 {
+        .platform-hero h1 {
             font-size: 3rem;
+            font-weight: 800;
             margin-bottom: 1rem;
-            background: linear-gradient(90deg, #fff, var(--accent-neon));
+            background: linear-gradient(135deg, #fff, var(--neon-cyan));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 30px rgba(0, 240, 255, 0.3);
-        }
-        .hero p {
-            font-size: 1.15rem;
-            color: var(--text-muted);
-            max-width: 700px;
-            margin: 0 auto 2rem auto;
         }
 
         /* Containers & Grids */
         .container {
-            max-width: 1250px;
+            max-width: 1300px;
             margin: 3rem auto;
-            padding: 0 1.5rem;
+            padding: 0 2rem;
         }
-        .section-title {
-            font-size: 1.8rem;
-            margin-bottom: 2rem;
+        .section-header {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
             display: flex;
             align-items: center;
-            gap: 12px;
-            color: #fff;
-            border-right: 5px solid var(--accent-neon);
-            padding-right: 15px;
+            gap: 10px;
+            border-right: 4px solid var(--accent);
+            padding-right: 12px;
         }
-        .grid {
+        .grid-cards {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 2rem;
         }
 
-        /* Modern Cards with Glassmorphism */
-        .card {
-            background: var(--card-bg);
-            border-radius: 18px;
+        /* Cards Style */
+        .p-card {
+            background: var(--bg-surface);
+            border-radius: 20px;
             overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--border-color);
             transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            position: relative;
         }
-        .card:hover {
+        .p-card:hover {
             transform: translateY(-8px);
-            border-color: var(--accent-neon);
-            box-shadow: 0 10px 30px rgba(0, 240, 255, 0.15);
+            border-color: var(--accent);
+            box-shadow: 0 20px 40px -15px rgba(99,102,241,0.3);
         }
-        .card-img {
-            height: 190px;
+        .card-img-wrap {
+            height: 200px;
             background-size: cover;
             background-position: center;
-            transition: transform 0.5s ease;
+            position: relative;
         }
-        .card:hover .card-img { transform: scale(1.05); }
         .card-body {
             padding: 1.5rem;
             flex-grow: 1;
@@ -173,612 +214,387 @@
             flex-direction: column;
             justify-content: space-between;
         }
-        .badge {
+        .tag-pill {
             display: inline-block;
-            background: rgba(0, 240, 255, 0.1);
-            color: var(--accent-neon);
-            padding: 5px 12px;
+            background: rgba(6, 182, 212, 0.1);
+            color: var(--neon-cyan);
+            padding: 4px 12px;
             border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            margin-bottom: 12px;
-            border: 1px solid rgba(0, 240, 255, 0.2);
-        }
-        .card-title {
-            font-size: 1.25rem;
+            font-size: 0.75rem;
+            font-weight: 700;
             margin-bottom: 10px;
-            color: #fff;
+            border: 1px solid rgba(6, 182, 212, 0.2);
         }
-        .card-text {
-            color: var(--text-muted);
-            font-size: 0.92rem;
-            margin-bottom: 1.5rem;
-        }
-        .card-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-top: 1px solid rgba(255, 255, 255, 0.06);
-            padding-top: 1rem;
-        }
-        .btn-card {
-            background: rgba(0, 240, 255, 0.15);
-            color: var(--accent-neon);
-            padding: 8px 16px;
-            border-radius: 8px;
-            border: 1px solid rgba(0, 240, 255, 0.3);
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        .btn-card:hover {
-            background: var(--accent-neon);
-            color: #05070f;
-        }
-        .actions {
-            display: flex;
-            gap: 15px;
-            color: var(--text-muted);
-            cursor: pointer;
-            font-size: 1.1rem;
-        }
-        .actions span:hover { color: var(--accent-neon); }
-        .liked { color: var(--danger) !important; text-shadow: 0 0 10px var(--danger); }
-        .saved { color: var(--accent-neon) !important; text-shadow: 0 0 10px var(--accent-neon); }
 
-        /* Streams Section (Multi-Platform: YouTube, Twitch, Kick, Trading) */
+        /* Streams Tabs & Grid */
         .stream-tabs {
             display: flex;
-            gap: 10px;
-            margin-bottom: 1.5rem;
+            gap: 12px;
+            margin-bottom: 2rem;
             overflow-x: auto;
+            padding-bottom: 5px;
         }
-        .tab-btn {
-            background: var(--card-bg);
+        .s-tab {
+            background: var(--bg-surface);
             color: var(--text-muted);
-            border: 1px solid rgba(255,255,255,0.08);
-            padding: 8px 20px;
+            border: 1px solid var(--border-color);
+            padding: 10px 22px;
             border-radius: 30px;
+            font-weight: 600;
             cursor: pointer;
-            font-weight: bold;
             transition: 0.3s;
             white-space: nowrap;
         }
-        .tab-btn.active, .tab-btn:hover {
-            background: var(--accent-neon);
-            color: #05070f;
-            border-color: var(--accent-neon);
-            box-shadow: 0 0 15px rgba(0,240,255,0.4);
-        }
-        .streams-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-        }
-        .stream-card {
-            background: var(--card-bg);
-            border-radius: 14px;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        .stream-card:hover { transform: translateY(-5px); border-color: var(--accent-neon); }
-        .stream-thumb {
-            height: 150px;
-            background-size: cover;
-            background-position: center;
-            position: relative;
-        }
-        .live-tag {
-            position: absolute;
-            top: 12px; left: 12px;
-            background: var(--live-red);
+        .s-tab.active, .s-tab:hover {
+            background: var(--accent);
             color: white;
-            padding: 4px 10px;
-            border-radius: 6px;
-            font-size: 0.75rem;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            box-shadow: 0 0 10px rgba(255, 0, 85, 0.5);
-        }
-        .live-tag::before {
-            content: ''; width: 7px; height: 7px; background: white; border-radius: 50%;
-            animation: pulse 1.2s infinite;
-        }
-        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.2; } 100% { opacity: 1; } }
-
-        /* Codes & Rewards Section */
-        .rewards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-            gap: 1.5rem;
-        }
-        .reward-card {
-            background: var(--card-bg);
-            border: 1px dashed var(--accent-neon);
-            padding: 1.5rem;
-            border-radius: 14px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-        .reward-code-box {
-            background: #05070f;
-            padding: 10px 14px;
-            border-radius: 8px;
-            font-family: monospace;
-            color: var(--accent-neon);
-            font-size: 1.05rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border: 1px solid rgba(0, 240, 255, 0.2);
+            border-color: var(--accent);
+            box-shadow: 0 0 20px var(--accent-glow);
         }
 
-        /* User Profile & Dashboard Modals */
-        .modal {
+        /* Profile Modal */
+        .modal-backdrop {
             display: none;
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(5, 7, 15, 0.85); backdrop-filter: blur(10px);
-            justify-content: center; align-items: center; z-index: 2000; padding: 1rem;
+            background: rgba(0,0,0,0.8); backdrop-filter: blur(12px);
+            justify-content: center; align-items: center; z-index: 2000; padding: 1.5rem;
         }
-        .modal-box {
-            background: var(--card-bg);
+        .modal-body {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
             padding: 2.5rem;
-            border-radius: 20px;
-            width: 100%; max-width: 450px;
-            border: 1px solid rgba(0, 240, 255, 0.3);
-            box-shadow: 0 0 30px rgba(0, 240, 255, 0.2);
+            width: 100%; max-width: 480px;
             text-align: center;
             position: relative;
-            max-height: 90vh; overflow-y: auto;
         }
-        .modal-box input {
-            width: 100%; padding: 12px; margin: 10px 0;
-            background: #05070f; border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 10px; color: #fff; font-size: 1rem;
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 20px 0;
         }
-        .close-btn {
-            position: absolute; top: 15px; left: 15px;
-            color: var(--text-muted); cursor: pointer; font-size: 1.3rem;
+        .stat-box {
+            background: rgba(0,0,0,0.3);
+            padding: 15px;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
         }
-        .stats-badge-container {
-            display: flex; justify-content: space-around;
-            background: #05070f; padding: 15px; border-radius: 12px;
-            margin: 15px 0; border: 1px solid rgba(255,255,255,0.05);
-        }
-        .stat-item h3 { color: var(--accent-neon); font-size: 1.3rem; }
-        .stat-item p { color: var(--text-muted); font-size: 0.8rem; }
+        .stat-box h3 { color: var(--neon-cyan); font-size: 1.5rem; }
+        .stat-box p { color: var(--text-muted); font-size: 0.85rem; }
 
         footer {
             text-align: center;
             padding: 3rem;
-            background-color: #030408;
+            background: rgba(3, 7, 18, 0.9);
+            border-top: 1px solid var(--border-color);
             color: var(--text-muted);
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            margin-top: 4rem;
+            margin-top: 5rem;
         }
     </style>
 </head>
 <body>
 
-    <!-- Header -->
-    <header>
-        <div class="logo" onclick="window.scrollTo(0,0)">
-            🎮 CINER <span>GAMES</span>
-        </div>
-        <nav>
-            <a href="#home">الرئيسية</a>
-            <a href="#streams">البثوط الحية</a>
-            <a href="#news">الأخبار</a>
-            <a href="#rewards">الجوائز والأكواد</a>
-            <a href="#trading">التداول والأسواق</a>
-        </nav>
-        <div class="user-action-area">
-            <button class="btn-glow" id="authBtn" onclick="openAuthModal()">تسجيل حساب</button>
-            <div id="userChip" style="display: none; align-items: center; gap: 10px; cursor: pointer;" onclick="openProfileModal()">
-                <img id="navAvatar" src="" style="width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--accent-neon); object-fit: cover;">
-                <span id="navName" style="font-weight: bold; color: var(--accent-neon);"></span>
-            </div>
-        </div>
-    </header>
-
-    <!-- Hero -->
-    <div class="hero" id="home">
-        <h1>المنصة الذكية للألعاب والبثوط الحية والجوائز</h1>
-        <p>تصفح البثوط الحية الحقيقية (يوتيوب، تويتش، كيك، والتداول)، اجمع الساعات والنقاط، واحصل على جوائز رقمية فورية!</p>
-        <a href="#streams" class="btn-glow" style="display: inline-block; text-decoration: none; padding: 12px 30px;">استكشف البثوط الآن</a>
-    </div>
-
-    <!-- Streams Section (Multi-Platform: YouTube, Twitch, Kick, Trading) -->
-    <div class="container" id="streams">
-        <h2 class="section-title">البثوط الحية العالمية الحقيقية</h2>
-        
-        <div class="stream-tabs">
-            <button class="tab-btn active" onclick="filterStreams('all', this)">الكل</button>
-            <button class="tab-btn" onclick="filterStreams('youtube', this)">بثوث يوتيوب 🔴</button>
-            <button class="tab-btn" onclick="filterStreams('twitch', this)">بثوث تويتش 🟣</button>
-            <button class="tab-btn" onclick="filterStreams('kick', this)">بثوث كيك 🟢</button>
-            <button class="tab-btn" onclick="filterStreams('trading', this)">أسواق وتداول 📈</button>
-        </div>
-
-        <div class="streams-grid" id="streamsGrid">
-            <!-- YouTube Stream -->
-            <div class="stream-card" data-category="youtube" onclick="openStreamPlayer('بث بطولة PUBG Mobile الرسمية', 'https://www.youtube.com/embed/live_stream?channel=UCqR5y7V6Y0z7gN1j5wF3b6A')">
-                <div class="stream-thumb" style="background-image: url('https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=600&q=80');">
-                    <div class="live-tag">يوتيوب مباشر</div>
-                </div>
-                <div style="padding: 1.2rem;">
-                    <span class="badge">PUBG Mobile</span>
-                    <h4 style="color: #fff; margin-bottom: 5px;">بطولة العالم الرسمية لببجي موبايل</h4>
-                    <p style="color: var(--text-muted); font-size: 0.85rem;">بث حي بدقة عالية مع توزيع جوائز للمشاهدين</p>
-                </div>
+    <!-- شاشة تسجيل الدخول الإجبارية الأولى -->
+    <div id="authScreen">
+        <div class="auth-card">
+            <div class="auth-logo">CINER</div>
+            <p style="color: var(--text-muted); margin-bottom: 2rem; font-size: 0.95rem;">منصة الألعاب والبثوث والأسواق الرقمية</p>
+            
+            <div id="loginSection">
+                <input type="email" id="lEmail" placeholder="البريد الإلكتروني...">
+                <input type="password" id="lPass" placeholder="كلمة المرور...">
+                <button class="btn-main" onclick="executeLogin()">تسجيل الدخول للمنصة</button>
+                <p style="margin-top: 1.5rem; font-size: 0.9rem; color: var(--text-muted);">ليس لديك حساب؟ <span style="color: var(--neon-cyan); cursor: pointer; font-weight: bold;" onclick="toggleAuthMode('reg')">أنشئ حساباً جديداً</span></p>
             </div>
 
-            <!-- Twitch Stream -->
-            <div class="stream-card" data-category="twitch" onclick="openStreamPlayer('بث بطولة Fortnite المحترفين - Twitch', 'https://player.twitch.tv/?channel=fortnite&parent=laythaziz.github.io')">
-                <div class="stream-thumb" style="background-image: url('https://images.unsplash.com/photo-1589241062272-c0a000071dfa?auto=format&fit=crop&w=600&q=80');">
-                    <div class="live-tag" style="background: #9146FF;">تويتش مباشر</div>
-                </div>
-                <div style="padding: 1.2rem;">
-                    <span class="badge" style="background: rgba(145,70,255,0.15); color: #b78cff;">Fortnite</span>
-                    <h4 style="color: #fff; margin-bottom: 5px;">نهائيات كأس فورتنايت العالمية</h4>
-                    <p style="color: var(--text-muted); font-size: 0.85rem;">مواجهات حماسية مباشرة من تويتش</p>
-                </div>
-            </div>
-
-            <!-- Kick Stream -->
-            <div class="stream-card" data-category="kick" onclick="openStreamPlayer('بث مباشر منصة كيك - Kick Gaming', 'https://player.kick.com/xqc')">
-                <div class="stream-thumb" style="background-image: url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=600&q=80');">
-                    <div class="live-tag" style="background: #53fc18; color: #000;">كيك مباشر</div>
-                </div>
-                <div style="padding: 1.2rem;">
-                    <span class="badge" style="background: rgba(83,252,24,0.15); color: #53fc18;">Kick Live</span>
-                    <h4 style="color: #fff; margin-bottom: 5px;">بث ألعاب منوعة وتحديات كبرى</h4>
-                    <p style="color: var(--text-muted); font-size: 0.85rem;">أبرز السترمرز على منصة Kick</p>
-                </div>
-            </div>
-
-            <!-- Trading Stream -->
-            <div class="stream-card" data-category="trading" onclick="openStreamPlayer('تحليل الأسواق المالية وتداول العملات الحية', 'https://www.youtube.com/embed/live_stream?channel=UCWlSUhsfnWv9UjDuuL2X77Q')">
-                <div class="stream-thumb" style="background-image: url('https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=600&q=80');">
-                    <div class="live-tag" style="background: #00ff66; color: #000;">تداول مباشر</div>
-                </div>
-                <div style="padding: 1.2rem;">
-                    <span class="badge" style="background: rgba(0,255,102,0.15); color: #00ff66;">Financial Markets</span>
-                    <h4 style="color: #fff; margin-bottom: 5px;">تحليل الأسواق والعملات الرقمية الحية</h4>
-                    <p style="color: var(--text-muted); font-size: 0.85rem;">متابعة أسعار البورصة والأسواق العالمية</p>
-                </div>
+            <div id="regSection" style="display: none;">
+                <input type="text" id="rName" placeholder="اسم المستخدم...">
+                <input type="email" id="rEmail" placeholder="البريد الإلكتروني...">
+                <input type="password" id="rPass" placeholder="كلمة المرور...">
+                <button class="btn-main" onclick="executeRegister()">إنشاء حساب وتفعيل</button>
+                <p style="margin-top: 1.5rem; font-size: 0.9rem; color: var(--text-muted);">لديك حساب بالفعل؟ <span style="color: var(--neon-cyan); cursor: pointer; font-weight: bold;" onclick="toggleAuthMode('login')">تسجيل الدخول</span></p>
             </div>
         </div>
     </div>
 
-    <!-- News Section -->
-    <div class="container" id="news">
-        <h2 class="section-title">أحدث أخبار الألعاب التقنية</h2>
-        <div class="grid">
-            <div class="card">
-                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1542751110-97427bbecf20?auto=format&fit=crop&w=600&q=80');"></div>
-                <div class="card-body">
-                    <div>
-                        <span class="badge">GTA VI</span>
-                        <h3 class="card-title">تفاصيل جديدة حول آليات الذكاء الاصطناعي في GTA VI</h3>
-                        <p class="card-text">استعراض أحدث تقارير روكستار حول سلوك الشخصيات الافتراضية في العالم المفتوح.</p>
+    <!-- المحتوى الرئيسي للمنصة (يظهر بعد الدخول) -->
+    <div id="platformContent">
+        <header>
+            <div class="nav-logo" onclick="window.scrollTo(0,0)">CINER PLATFORM</div>
+            <div class="nav-links">
+                <a href="#streams">البثوث الحية</a>
+                <a href="#news">الأخبار</a>
+                <a href="#rewards">المكافآت والأكواد</a>
+            </div>
+            <div class="user-profile-badge" onclick="openProfileModal()">
+                <img id="headerAvatar" src="" style="width: 38px; height: 38px; border-radius: 50%; object-fit: cover; border: 2px solid var(--neon-cyan);">
+                <span id="headerName" style="font-weight: 700; font-size: 0.9rem;"></span>
+            </div>
+        </header>
+
+        <section class="platform-hero">
+            <h1>عالم البثوث والألعاب المتقدم</h1>
+            <p>تابع أقوى البثوث الحية (يوتيوب، تويتش، كيك، والتداول)، اجمع الساعات والنقاط، واحصل على جوائزك الفورية.</p>
+        </section>
+
+        <!-- Streams Section -->
+        <div class="container" id="streams">
+            <div class="section-header">البثوث الحية والأسواق العالمية</div>
+            <div class="stream-tabs">
+                <div class="s-tab active" onclick="filterStreams('all', this)">الكل</div>
+                <div class="s-tab" onclick="filterStreams('youtube', this)">بثوث يوتيوب 🔴</div>
+                <div class="s-tab" onclick="filterStreams('twitch', this)">بثوث تويتش 🟣</div>
+                <div class="s-tab" onclick="filterStreams('kick', this)">بثوث كيك 🟢</div>
+                <div class="s-tab" onclick="filterStreams('trading', this)">أسواق وتداول 📈</div>
+            </div>
+
+            <div class="grid-cards" id="streamsGrid">
+                <!-- YouTube -->
+                <div class="p-card" data-cat="youtube" onclick="openPlayer('بث بطولة PUBG Mobile الرسمية', 'https://www.youtube.com/embed/live_stream?channel=UCqR5y7V6Y0z7gN1j5wF3b6A')">
+                    <div class="card-img-wrap" style="background-image: url('https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=600&q=80');">
+                        <span class="tag-pill" style="position: absolute; top: 12px; left: 12px; background: #ef4444; color: #fff;">يوتيوب مباشر</span>
                     </div>
-                    <div class="card-footer">
-                        <button class="btn-card" onclick="alert('جاري فتح المقال...')">قراءة التفاصيل</button>
-                        <div class="actions">
-                            <span onclick="toggleLike(this)">❤️ <span>512</span></span>
-                            <span onclick="toggleSave(this, 'تفاصيل جديدة حول آليات الذكاء الاصطناعي في GTA VI')">⭐</span>
+                    <div class="card-body">
+                        <div>
+                            <span class="tag-pill">PUBG Mobile</span>
+                            <h3 style="font-size: 1.15rem; margin-bottom: 8px;">بطولة العالم الرسمية لببجي موبايل</h3>
+                            <p style="color: var(--text-muted); font-size: 0.85rem;">بث حي بدقة عالية مع توزيع جوائز للمشاهدين</p>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="card">
-                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=600&q=80');"></div>
-                <div class="card-body">
-                    <div>
-                        <span class="badge">Minecraft & Valorant</span>
-                        <h3 class="card-title">تحديثات ضخمة لخوادم اللعب وسكنات فالورانت الحصرية</h3>
-                        <p class="card-text">أبرز الإضافات البرمجية والخرائط الجديدة المنتظرة هذا الشهر.</p>
+                <!-- Twitch -->
+                <div class="p-card" data-cat="twitch" onclick="openPlayer('بث بطولة Fortnite - Twitch', 'https://player.twitch.tv/?channel=fortnite&parent=laythaziz.github.io')">
+                    <div class="card-img-wrap" style="background-image: url('https://images.unsplash.com/photo-1589241062272-c0a000071dfa?auto=format&fit=crop&w=600&q=80');">
+                        <span class="tag-pill" style="position: absolute; top: 12px; left: 12px; background: #9146FF; color: #fff;">تويتش مباشر</span>
                     </div>
-                    <div class="card-footer">
-                        <button class="btn-card" onclick="alert('جاري فتح المقال...')">قراءة التفاصيل</button>
-                        <div class="actions">
-                            <span onclick="toggleLike(this)">❤️ <span>324</span></span>
-                            <span onclick="toggleSave(this, 'تحديثات ضخمة لخوادم اللعب وسكنات فالورانت الحصرية')">⭐</span>
+                    <div class="card-body">
+                        <div>
+                            <span class="tag-pill">Fortnite</span>
+                            <h3 style="font-size: 1.15rem; margin-bottom: 8px;">نهائيات كأس فورتنايت العالمية</h3>
+                            <p style="color: var(--text-muted); font-size: 0.85rem;">مواجهات حماسية مباشرة من منصة تويتش</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kick -->
+                <div class="p-card" data-cat="kick" onclick="openPlayer('بث مباشر منصة كيك - Kick', 'https://player.kick.com/xqc')">
+                    <div class="card-img-wrap" style="background-image: url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=600&q=80');">
+                        <span class="tag-pill" style="position: absolute; top: 12px; left: 12px; background: #53fc18; color: #000;">كيك مباشر</span>
+                    </div>
+                    <div class="card-body">
+                        <div>
+                            <span class="tag-pill">Kick Gaming</span>
+                            <h3 style="font-size: 1.15rem; margin-bottom: 8px;">بث ألعاب منوعة وتحديات كبرى</h3>
+                            <p style="color: var(--text-muted); font-size: 0.85rem;">أبرز السترمرز على منصة Kick</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trading -->
+                <div class="p-card" data-cat="trading" onclick="openPlayer('تحليل الأسواق المالية والعملات الحية', 'https://www.youtube.com/embed/live_stream?channel=UCWlSUhsfnWv9UjDuuL2X77Q')">
+                    <div class="card-img-wrap" style="background-image: url('https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=600&q=80');">
+                        <span class="tag-pill" style="position: absolute; top: 12px; left: 12px; background: #10b981; color: #fff;">تداول مباشر</span>
+                    </div>
+                    <div class="card-body">
+                        <div>
+                            <span class="tag-pill">Financial Markets</span>
+                            <h3 style="font-size: 1.15rem; margin-bottom: 8px;">تحليل الأسواق والعملات الرقمية الحية</h3>
+                            <p style="color: var(--text-muted); font-size: 0.85rem;">متابعة البورصة والأسواق العالمية مباشرة</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Rewards & Digital Codes Section -->
-    <div class="container" id="rewards">
-        <h2 class="section-title">الجوائز الرقمية وأكواد الشحن الفردية</h2>
-        <div class="rewards-grid">
-            <div class="reward-card">
-                <span class="badge">PUBG Mobile VIP</span>
-                <h4>كود شحن شدات 660 UC</h4>
-                <p style="color: var(--text-muted); font-size: 0.85rem;">متاحة للأعضاء الذين أمضوا أكثر من ساعتين تصفح.</p>
-                <div class="reward-code-box">
-                    <span id="rc1">CINER-UC-660-VIP</span>
-                    <button class="btn-card" onclick="claimReward('CINER-UC-660-VIP', 10)">استلام</button>
+        <!-- Rewards Section -->
+        <div class="container" id="rewards">
+            <div class="section-header">الجوائز الرقمية وأكواد الشحن الحصرية</div>
+            <div class="grid-cards">
+                <div class="p-card" style="padding: 1.5rem; border: 1px dashed var(--neon-cyan);">
+                    <span class="tag-pill">PUBG Mobile VIP</span>
+                    <h3 style="font-size: 1.2rem; margin: 10px 0;">كود شحن شدات 660 UC</h3>
+                    <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 15px;">متاحة للأعضاء النشطين.</p>
+                    <button class="btn-main" onclick="claimReward('CINER-UC-660-VIP', 20)">استلام الكود (20 نقطة)</button>
                 </div>
-            </div>
-
-            <div class="reward-card">
-                <span class="badge">Roblox / Fortnite</span>
-                <h4>بطاقة هدايا روبوكس / فري في</h4>
-                <p style="color: var(--text-muted); font-size: 0.85rem;">هدية ترحيبية للمستخدمين الجدد.</p>
-                <div class="reward-code-box">
-                    <span id="rc2">CINER-GIFT-2026</span>
-                    <button class="btn-card" onclick="claimReward('CINER-GIFT-2026', 15)">استلام</button>
+                <div class="p-card" style="padding: 1.5rem; border: 1px dashed var(--neon-cyan);">
+                    <span class="tag-pill">Roblox / Fortnite</span>
+                    <h3 style="font-size: 1.2rem; margin: 10px 0;">جفت كارد روبوكس 10$</h3>
+                    <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 15px;">هدية ترحيبية للمستخدمين.</p>
+                    <button class="btn-main" onclick="claimReward('CINER-ROBLOX-10', 30)">استلام الكود (30 نقطة)</button>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Auth Modal (Login / Register & Email Verification) -->
-    <div class="modal" id="authModal">
-        <div class="modal-box">
-            <span class="close-btn" onclick="closeAuthModal()">✕</span>
-            <h3 id="authTitle" style="color: var(--accent-neon); margin-bottom: 10px;">انضم إلى CINER Games</h3>
-            <p id="authSubtitle" style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 15px;">أنشئ حسابك الخاص لتتبع ساعاتك ونقاطك</p>
-
-            <div id="registerForm">
-                <input type="text" id="regName" placeholder="اسم المستخدم...">
-                <input type="email" id="regEmail" placeholder="البريد الإلكتروني...">
-                <input type="password" id="regPass" placeholder="كلمة المرور...">
-                <button class="btn-glow" style="width: 100%; margin-top: 10px; padding: 12px;" onclick="handleRegister()">إرسال رمز التفعيل</button>
-                <p style="margin-top: 12px; font-size: 0.85rem; color: var(--text-muted);">لديك حساب مسبق؟ <span style="color: var(--accent-neon); cursor: pointer;" onclick="switchAuth('login')">تسجيل الدخول</span></p>
-            </div>
-
-            <div id="verifyForm" style="display: none;">
-                <p style="color: var(--success); font-size: 0.85rem; margin-bottom: 10px;">✉️ تم إرسال رسالة تفعيل وهمية إلى بريدك. أدخل الرمز:</p>
-                <input type="text" id="verifyCode" value="7719" style="text-align: center; letter-spacing: 5px; font-weight: bold;">
-                <button class="btn-glow" style="width: 100%; padding: 12px;" onclick="handleVerify()">تفعيل الحساب والدخول</button>
-            </div>
-
-            <div id="loginForm" style="display: none;">
-                <input type="email" id="loginEmail" placeholder="البريد الإلكتروني...">
-                <input type="password" id="loginPass" placeholder="كلمة المرور...">
-                <button class="btn-glow" style="width: 100%; margin-top: 10px; padding: 12px;" onclick="handleLogin()">تسجيل الدخول</button>
-                <p style="margin-top: 12px; font-size: 0.85rem; color: var(--text-muted);">ليس لديك حساب؟ <span style="color: var(--accent-neon); cursor: pointer;" onclick="switchAuth('register')">أنشئ حساباً جديداً</span></p>
-            </div>
-        </div>
+        <footer>
+            <p>&copy; 2026 CINER PLATFORM. جميع الحقوق محفوظة لشبكة ألعاب وتصميم ليث عزيز.</p>
+        </footer>
     </div>
 
     <!-- Profile Dashboard Modal -->
-    <div class="modal" id="profileModal">
-        <div class="modal-box">
-            <span class="close-btn" onclick="closeProfileModal()">✕</span>
-            <div style="position: relative; width: 85px; height: 85px; margin: 0 auto 10px auto;">
-                <img id="profileAvatar" src="" style="width: 85px; height: 85px; border-radius: 50%; border: 3px solid var(--accent-neon); object-fit: cover;">
-                <label for="uploadAv" style="position: absolute; bottom: 0; right: 0; background: var(--accent-neon); color: #05070f; border-radius: 50%; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 0.8rem;">📷</label>
-                <input type="file" id="uploadAv" accept="image/*" style="display: none;" onchange="uploadAvatar(event)">
+    <div class="modal-backdrop" id="profileModal">
+        <div class="modal-body">
+            <span style="position: absolute; top: 15px; left: 15px; cursor: pointer; color: var(--text-muted); font-size: 1.2rem;" onclick="closeProfileModal()">✕</span>
+            <div style="position: relative; width: 85px; height: 85px; margin: 0 auto 15px auto;">
+                <img id="mAvatar" src="" style="width: 85px; height: 85px; border-radius: 50%; border: 3px solid var(--neon-cyan); object-fit: cover;">
+                <label for="upAvatar" style="position: absolute; bottom: 0; right: 0; background: var(--neon-cyan); color: #000; border-radius: 50%; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 0.8rem;">📷</label>
+                <input type="file" id="upAvatar" accept="image/*" style="display: none;" onchange="uploadUserAvatar(event)">
             </div>
-            <h3 id="profileName" style="color: #fff;"></h3>
-            <p id="profileEmail" style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 15px;"></p>
+            <h3 id="mName" style="font-size: 1.3rem; margin-bottom: 5px;"></h3>
+            <p id="mEmail" style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 15px;"></p>
 
-            <div class="stats-badge-container">
-                <div class="stat-item">
-                    <h3 id="statHours">0</h3>
-                    <p>ساعات الموقع</p>
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <h3 id="mHours">0</h3>
+                    <p>ساعات التصفح</p>
                 </div>
-                <div class="stat-item">
-                    <h3 id="statPoints">0</h3>
+                <div class="stat-box">
+                    <h3 id="mPoints">0</h3>
                     <p>نقاط الولاء</p>
                 </div>
             </div>
 
-            <div style="background: #05070f; padding: 12px; border-radius: 10px; text-align: right; margin-bottom: 15px; border: 1px solid rgba(255,255,255,0.05);">
-                <h4 style="font-size: 0.9rem; color: var(--accent-neon); margin-bottom: 5px;">⭐ المقالات المفضلة لديك:</h4>
-                <ul id="profileSavedList" style="list-style: none; font-size: 0.85rem; color: var(--text-muted); max-height: 100px; overflow-y: auto;"></ul>
-            </div>
-
-            <button class="btn-glow" style="background: var(--danger); color: #fff; width: 100%; box-shadow: 0 0 15px rgba(255,0,85,0.3);" onclick="logout()">تسجيل الخروج</button>
+            <button class="btn-main" style="background: var(--danger); box-shadow: 0 10px 20px -5px rgba(239,68,68,0.4);" onclick="executeLogout()">تسجيل الخروج</button>
         </div>
     </div>
 
-    <!-- Stream Player Modal -->
-    <div class="modal" id="streamModal">
-        <div class="modal-box" style="max-width: 800px; padding: 1rem;">
-            <span class="close-btn" onclick="closeStreamModal()">✕</span>
-            <h3 id="streamModalTitle" style="color: var(--accent-neon); margin-bottom: 10px; font-size: 1.1rem;"></h3>
-            <div style="position: relative; width: 100%; padding-bottom: 56.25%; background: #000; border-radius: 12px; overflow: hidden; border: 1px solid rgba(0,240,255,0.2);">
-                <iframe id="streamIframe" src="" style="position: absolute; top:0; left:0; width:100%; height:100%; border:0;" allowfullscreen></iframe>
+    <!-- Player Modal -->
+    <div class="modal-backdrop" id="playerModal">
+        <div class="modal-body" style="max-width: 800px; padding: 1rem;">
+            <span style="position: absolute; top: 10px; left: 15px; cursor: pointer; color: var(--text-muted); font-size: 1.2rem;" onclick="closePlayer()">✕</span>
+            <h3 id="playerTitle" style="color: var(--neon-cyan); margin-bottom: 10px; font-size: 1.1rem;"></h3>
+            <div style="position: relative; width: 100%; padding-bottom: 56.25%; background: #000; border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color);">
+                <iframe id="playerIframe" src="" style="position: absolute; top:0; left:0; width:100%; height:100%; border:0;" allowfullscreen></iframe>
             </div>
         </div>
     </div>
-
-    <footer>
-        <p>&copy; 2026 CINER Games. منصة الألعاب والترفيه المتكاملة بتصميم وتطوير ليث عزيز.</p>
-    </footer>
 
     <script>
-        // User State Management
-        let currentUser = JSON.parse(localStorage.getItem('ciner_pro_user')) || null;
+        let sessionUser = JSON.parse(localStorage.getItem('ciner_final_user')) || null;
 
-        // Auto increment session hours and points for active user
+        // عداد الساعات والنقاط التلقائي لكل دقيقة
         setInterval(() => {
-            if(currentUser) {
-                currentUser.minutes = (currentUser.minutes || 0) + 1;
-                currentUser.hours = (currentUser.minutes / 60).toFixed(1);
-                currentUser.points = (currentUser.points || 0) + 1;
-                localStorage.setItem('ciner_pro_user', JSON.stringify(currentUser));
+            if(sessionUser) {
+                sessionUser.minutes = (sessionUser.minutes || 0) + 1;
+                sessionUser.hours = (sessionUser.minutes / 60).toFixed(1);
+                sessionUser.points = (sessionUser.points || 0) + 1;
+                localStorage.setItem('ciner_final_user', JSON.stringify(sessionUser));
             }
-        }, 60000); // كل دقيقة تزيد نقاط وساعات
+        }, 60000);
 
         window.onload = function() {
-            updateUI();
+            checkSession();
         }
 
-        function updateUI() {
-            if(currentUser) {
-                document.getElementById('authBtn').style.display = 'none';
-                const chip = document.getElementById('userChip');
-                chip.style.display = 'flex';
-                document.getElementById('navName').innerText = currentUser.name;
-                document.getElementById('navAvatar').src = currentUser.avatar || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&q=80';
+        function checkSession() {
+            if(sessionUser) {
+                document.getElementById('authScreen').style.display = 'none';
+                document.getElementById('platformContent').style.display = 'block';
+                document.getElementById('headerName').innerText = sessionUser.name;
+                document.getElementById('headerAvatar').src = sessionUser.avatar || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&q=80';
             } else {
-                document.getElementById('authBtn').style.display = 'block';
-                document.getElementById('userChip').style.display = 'none';
+                document.getElementById('authScreen').style.display = 'flex';
+                document.getElementById('platformContent').style.display = 'none';
             }
         }
 
-        function openAuthModal() { document.getElementById('authModal').style.display = 'flex'; }
-        function closeAuthModal() { document.getElementById('authModal').style.display = 'none'; }
-
-        function switchAuth(mode) {
-            if(mode === 'login') {
-                document.getElementById('registerForm').style.display = 'none';
-                document.getElementById('verifyForm').style.display = 'none';
-                document.getElementById('loginForm').style.display = 'block';
-                document.getElementById('authTitle').innerText = 'تسجيل الدخول';
+        function toggleAuthMode(mode) {
+            if(mode === 'reg') {
+                document.getElementById('loginSection').style.display = 'none';
+                document.getElementById('regSection').style.display = 'block';
             } else {
-                document.getElementById('registerForm').style.display = 'block';
-                document.getElementById('verifyForm').style.display = 'none';
-                document.getElementById('loginForm').style.display = 'none';
-                document.getElementById('authTitle').innerText = 'انضم إلى CINER Games';
+                document.getElementById('loginSection').style.display = 'block';
+                document.getElementById('regSection').style.display = 'none';
             }
         }
 
-        let tempUser = null;
-        function handleRegister() {
-            const name = document.getElementById('regName').value;
-            const email = document.getElementById('regEmail').value;
-            const pass = document.getElementById('regPass').value;
-            if(!name || !email || !pass) { alert('املأ جميع الحقول من فضلك'); return; }
-            tempUser = { name, email, pass, avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&q=80', hours: 0.5, points: 50, saved: [], minutes: 30 };
-            document.getElementById('registerForm').style.display = 'none';
-            document.getElementById('verifyForm').style.display = 'block';
+        function executeRegister() {
+            const name = document.getElementById('rName').value;
+            const email = document.getElementById('rEmail').value;
+            const pass = document.getElementById('rPass').value;
+            if(!name || !email || !pass) { alert('املأ جميع الحقول المطلوبة'); return; }
+            
+            sessionUser = { name, email, pass, avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&q=80', hours: 0.5, points: 50, minutes: 30 };
+            localStorage.setItem('ciner_final_user', JSON.stringify(sessionUser));
+            checkSession();
+            alert('🎉 تم إنشاء الحساب بنجاح وحصلت على 50 نقطة ترحيبية!');
         }
 
-        function handleVerify() {
-            currentUser = tempUser;
-            localStorage.setItem('ciner_pro_user', JSON.stringify(currentUser));
-            closeAuthModal();
-            updateUI();
-            alert('🎉 تم تفعيل الحساب وحصلت على 50 نقطة هدية ترحيبية!');
+        function executeLogin() {
+            const email = document.getElementById('lEmail').value;
+            const pass = document.getElementById('lPass').value;
+            if(!email || !pass) { alert('أدخل بيانات الحساب'); return; }
+
+            sessionUser = { name: email.split('@')[0], email, avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&q=80', hours: 2.0, points: 120, minutes: 120 };
+            localStorage.setItem('ciner_final_user', JSON.stringify(sessionUser));
+            checkSession();
+            alert('مرحباً بك مجدداً في المنصة!');
         }
 
-        function handleLogin() {
-            const email = document.getElementById('loginEmail').value;
-            const pass = document.getElementById('loginPass').value;
-            if(!email || !pass) { alert('أدخل بيانات الدخول'); return; }
-            currentUser = { name: email.split('@')[0], email, avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&q=80', hours: 2.5, points: 120, saved: [], minutes: 150 };
-            localStorage.setItem('ciner_pro_user', JSON.stringify(currentUser));
-            closeAuthModal();
-            updateUI();
-            alert('مرحباً بك مجدداً في بروفايلك!');
+        function executeLogout() {
+            localStorage.removeItem('ciner_final_user');
+            sessionUser = null;
+            closeProfileModal();
+            checkSession();
+            alert('تم تسجيل الخروج بنجاح.');
         }
 
         function openProfileModal() {
-            if(!currentUser) return;
-            document.getElementById('profileAvatar').src = currentUser.avatar;
-            document.getElementById('profileName').innerText = currentUser.name;
-            document.getElementById('profileEmail').innerText = currentUser.email;
-            document.getElementById('statHours').innerText = currentUser.hours || 1.0;
-            document.getElementById('statPoints').innerText = currentUser.points || 100;
-
-            const list = document.getElementById('profileSavedList');
-            list.innerHTML = '';
-            if(currentUser.saved && currentUser.saved.length > 0) {
-                currentUser.saved.forEach(item => {
-                    let li = document.createElement('li');
-                    li.innerText = '• ' + item;
-                    li.style.margin = '4px 0';
-                    list.appendChild(li);
-                });
-            } else {
-                let li = document.createElement('li');
-                li.innerText = 'لا توجد مقالات محفوظة.';
-                list.appendChild(li);
-            }
+            if(!sessionUser) return;
+            document.getElementById('mAvatar').src = sessionUser.avatar;
+            document.getElementById('mName').innerText = sessionUser.name;
+            document.getElementById('mEmail').innerText = sessionUser.email;
+            document.getElementById('mHours').innerText = sessionUser.hours || 1.0;
+            document.getElementById('mPoints').innerText = sessionUser.points || 100;
             document.getElementById('profileModal').style.display = 'flex';
         }
         function closeProfileModal() { document.getElementById('profileModal').style.display = 'none'; }
 
-        function uploadAvatar(event) {
+        function uploadUserAvatar(event) {
             const file = event.target.files[0];
             if(file) {
                 const reader = new FileReader();
                 reader.onload = function(e) {
-                    currentUser.avatar = e.target.result;
-                    localStorage.setItem('ciner_pro_user', JSON.stringify(currentUser));
-                    document.getElementById('navAvatar').src = currentUser.avatar;
-                    document.getElementById('profileAvatar').src = currentUser.avatar;
+                    sessionUser.avatar = e.target.result;
+                    localStorage.setItem('ciner_final_user', JSON.stringify(sessionUser));
+                    document.getElementById('headerAvatar').src = sessionUser.avatar;
+                    document.getElementById('mAvatar').src = sessionUser.avatar;
                     alert('تم تحديث صورتك الشخصية بنجاح!');
                 }
                 reader.readAsDataURL(file);
             }
         }
 
-        function logout() {
-            localStorage.removeItem('ciner_pro_user');
-            currentUser = null;
-            closeProfileModal();
-            updateUI();
-            alert('تم تسجيل الخروج.');
-        }
-
-        function filterStreams(category, btn) {
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        function filterStreams(cat, btn) {
+            document.querySelectorAll('.s-tab').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
-            const cards = document.querySelectorAll('.stream-card');
-            cards.forEach(card => {
-                if(category === 'all' || card.getAttribute('data-category') === category) {
-                    card.style.display = 'block';
+            document.querySelectorAll('.p-card').forEach(card => {
+                if(cat === 'all' || card.getAttribute('data-cat') === cat) {
+                    card.style.display = 'flex';
                 } else {
                     card.style.display = 'none';
                 }
             });
         }
 
-        function openStreamPlayer(title, url) {
-            document.getElementById('streamModalTitle').innerText = '🔴 ' + title;
-            document.getElementById('streamIframe').src = url;
-            document.getElementById('streamModal').style.display = 'flex';
+        function openPlayer(title, url) {
+            document.getElementById('playerTitle').innerText = '🔴 ' + title;
+            document.getElementById('playerIframe').src = url;
+            document.getElementById('playerModal').style.display = 'flex';
         }
-        function closeStreamModal() {
-            document.getElementById('streamModal').style.display = 'none';
-            document.getElementById('streamIframe').src = '';
-        }
-
-        function toggleLike(element) {
-            element.classList.toggle('liked');
-            let span = element.querySelector('span');
-            let count = parseInt(span.innerText);
-            span.innerText = element.classList.contains('liked') ? count + 1 : count - 1;
+        function closePlayer() {
+            document.getElementById('playerModal').style.display = 'none';
+            document.getElementById('playerIframe').src = '';
         }
 
-        function toggleSave(element, title) {
-            if(!currentUser) { alert('سجل دخولك أولاً لحفظ المقالات في بروفايلك!'); openAuthModal(); return; }
-            element.classList.toggle('saved');
-            if(element.classList.contains('saved')) {
-                if(!currentUser.saved.includes(title)) currentUser.saved.push(title);
-                alert('تمت إضافة المقال لمفضلتك!');
+        function claimReward(code, cost) {
+            if(sessionUser.points >= cost) {
+                sessionUser.points -= cost;
+                localStorage.setItem('ciner_final_user', JSON.stringify(sessionUser));
+                alert('🎁 تهانينا! الكود الخاص بك هو: ' + code + '\nتم خصم ' + cost + ' نقطة.');
             } else {
-                currentUser.saved = currentUser.saved.filter(t => t !== title);
-                alert('تم إزالة المقال من المفضلة.');
-            }
-            localStorage.setItem('ciner_pro_user', JSON.stringify(currentUser));
-        }
-
-        function claimReward(code, pointsCost) {
-            if(!currentUser) { alert('يجب تسجيل الدخول لاستلام الجوائز الرقمية!'); openAuthModal(); return; }
-            if(currentUser.points >= pointsCost) {
-                currentUser.points -= pointsCost;
-                localStorage.setItem('ciner_pro_user', JSON.stringify(currentUser));
-                alert('🎁 تهانينا! الكود الخاص بك هو: ' + code + '\nتم خصم ' + pointsCost + ' نقطة من رصيدك.');
-            } else {
-                alert('عذراً، نقاطك غير كافية (' + currentUser.points + '). تصفح الموقع أكثر لجمع النقاط!');
+                alert('عذراً، رصيدك (' + sessionUser.points + ' نقطة) لا يكفي. تصفح الموقع أكثر لجمع النقاط!');
             }
         }
     </script>
