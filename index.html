@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CINER Games - المنصة الاحترافية للألعاب والبثوث الحية</title>
+    <title>CINER Games - المنصة العالمية للألعاب والبثوث الحية</title>
     <style>
         :root {
-            --bg-color: #070913;
-            --card-bg: #0f172a;
-            --accent-color: #38bdf8;
-            --accent-hover: #0ea5e9;
-            --text-color: #f8fafc;
+            --bg-color: #05070f;
+            --card-bg: #0d1322;
+            --accent-neon: #00f0ff;
+            --accent-purple: #7000ff;
+            --text-color: #f1f5f9;
             --text-muted: #94a3b8;
-            --danger: #f43f5e;
-            --success: #22c55e;
-            --border-color: #1e293b;
-            --live-red: #ef4444;
+            --danger: #ff0055;
+            --success: #00ff66;
+            --border-glow: rgba(0, 240, 255, 0.2);
+            --live-red: #ff3333;
         }
         * {
             box-sizing: border-box;
@@ -28,12 +28,14 @@
             background-color: var(--bg-color);
             color: var(--text-color);
             line-height: 1.6;
+            overflow-x: hidden;
         }
+        /* Top Navigation Bar */
         header {
-            background: rgba(7, 9, 19, 0.95);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border-color);
-            padding: 0.8rem 1.5rem;
+            background: rgba(5, 7, 15, 0.9);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 0.9rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -42,142 +44,323 @@
             z-index: 1000;
         }
         .logo {
-            font-size: 1.6rem;
-            font-weight: bold;
-            color: var(--accent-color);
+            font-size: 1.7rem;
+            font-weight: 900;
+            color: var(--accent-neon);
             cursor: pointer;
+            letter-spacing: 1px;
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.4);
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
         }
-        .logo span { color: var(--text-color); }
+        .logo span { color: #ffffff; }
         nav {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 20px;
             overflow-x: auto;
-            padding: 5px 0;
         }
         nav::-webkit-scrollbar { display: none; }
         nav a {
             color: var(--text-muted);
             text-decoration: none;
-            transition: color 0.3s;
+            transition: all 0.3s ease;
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             white-space: nowrap;
         }
-        nav a:hover { color: var(--accent-color); }
-        .user-nav-area {
+        nav a:hover {
+            color: var(--accent-neon);
+            text-shadow: 0 0 8px var(--accent-neon);
+        }
+        .user-action-area {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
-        .btn-auth {
-            background: linear-gradient(135deg, var(--accent-color), var(--accent-hover));
-            color: #070913;
+        .btn-glow {
+            background: linear-gradient(135deg, var(--accent-neon), var(--accent-purple));
+            color: #05070f;
             border: none;
-            padding: 7px 14px;
-            border-radius: 8px;
+            padding: 8px 18px;
+            border-radius: 50px;
             font-weight: bold;
             cursor: pointer;
             font-size: 0.85rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
             white-space: nowrap;
         }
+        .btn-glow:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px rgba(0, 240, 255, 0.6);
+        }
+
+        /* Hero Section */
         .hero {
             text-align: center;
-            padding: 4rem 1rem;
-            background: linear-gradient(rgba(7, 9, 19, 0.75), rgba(7, 9, 19, 0.95)), url('https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=1200&q=80') center/cover;
-            border-bottom: 1px solid var(--border-color);
+            padding: 6rem 1rem;
+            background: linear-gradient(180deg, rgba(5,7,15,0.6) 0%, var(--bg-color) 100%), url('https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1400&q=80') center/cover;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
         }
-        .hero h1 { font-size: 2.5rem; margin-bottom: 1rem; color: var(--text-color); }
-        .hero p { font-size: 1.1rem; color: var(--text-muted); max-width: 650px; margin: 0 auto 1.5rem auto; }
-        .container { max-width: 1200px; margin: 2.5rem auto; padding: 0 1rem; }
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, #fff, var(--accent-neon));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(0, 240, 255, 0.3);
+        }
+        .hero p {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto 2rem auto;
+        }
+
+        /* Containers & Grids */
+        .container {
+            max-width: 1250px;
+            margin: 3rem auto;
+            padding: 0 1.5rem;
+        }
         .section-title {
-            font-size: 1.6rem;
-            margin-bottom: 1.5rem;
-            border-right: 4px solid var(--accent-color);
-            padding-right: 12px;
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #fff;
+            border-right: 5px solid var(--accent-neon);
+            padding-right: 15px;
         }
         .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        /* Modern Cards with Glassmorphism */
+        .card {
+            background: var(--card-bg);
+            border-radius: 18px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+        }
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent-neon);
+            box-shadow: 0 10px 30px rgba(0, 240, 255, 0.15);
+        }
+        .card-img {
+            height: 190px;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.5s ease;
+        }
+        .card:hover .card-img { transform: scale(1.05); }
+        .card-body {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .badge {
+            display: inline-block;
+            background: rgba(0, 240, 255, 0.1);
+            color: var(--accent-neon);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-bottom: 12px;
+            border: 1px solid rgba(0, 240, 255, 0.2);
+        }
+        .card-title {
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+        .card-text {
+            color: var(--text-muted);
+            font-size: 0.92rem;
+            margin-bottom: 1.5rem;
+        }
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            padding-top: 1rem;
+        }
+        .btn-card {
+            background: rgba(0, 240, 255, 0.15);
+            color: var(--accent-neon);
+            padding: 8px 16px;
+            border-radius: 8px;
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .btn-card:hover {
+            background: var(--accent-neon);
+            color: #05070f;
+        }
+        .actions {
+            display: flex;
+            gap: 15px;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+        .actions span:hover { color: var(--accent-neon); }
+        .liked { color: var(--danger) !important; text-shadow: 0 0 10px var(--danger); }
+        .saved { color: var(--accent-neon) !important; text-shadow: 0 0 10px var(--accent-neon); }
+
+        /* Streams Section (Multi-Platform: YouTube, Twitch, Kick, Trading) */
+        .stream-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 1.5rem;
+            overflow-x: auto;
+        }
+        .tab-btn {
+            background: var(--card-bg);
+            color: var(--text-muted);
+            border: 1px solid rgba(255,255,255,0.08);
+            padding: 8px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+            white-space: nowrap;
+        }
+        .tab-btn.active, .tab-btn:hover {
+            background: var(--accent-neon);
+            color: #05070f;
+            border-color: var(--accent-neon);
+            box-shadow: 0 0 15px rgba(0,240,255,0.4);
+        }
+        .streams-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 1.5rem;
         }
-        .card {
-            background-color: var(--card-bg);
+        .stream-card {
+            background: var(--card-bg);
             border-radius: 14px;
             overflow: hidden;
-            border: 1px solid var(--border-color);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .stream-card:hover { transform: translateY(-5px); border-color: var(--accent-neon); }
+        .stream-thumb {
+            height: 150px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        .live-tag {
+            position: absolute;
+            top: 12px; left: 12px;
+            background: var(--live-red);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            box-shadow: 0 0 10px rgba(255, 0, 85, 0.5);
+        }
+        .live-tag::before {
+            content: ''; width: 7px; height: 7px; background: white; border-radius: 50%;
+            animation: pulse 1.2s infinite;
+        }
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.2; } 100% { opacity: 1; } }
+
+        /* Codes & Rewards Section */
+        .rewards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+            gap: 1.5rem;
+        }
+        .reward-card {
+            background: var(--card-bg);
+            border: 1px dashed var(--accent-neon);
+            padding: 1.5rem;
+            border-radius: 14px;
             display: flex;
             flex-direction: column;
+            gap: 12px;
+        }
+        .reward-code-box {
+            background: #05070f;
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-family: monospace;
+            color: var(--accent-neon);
+            font-size: 1.05rem;
+            display: flex;
             justify-content: space-between;
-            transition: transform 0.3s;
+            align-items: center;
+            border: 1px solid rgba(0, 240, 255, 0.2);
         }
-        .card:hover { transform: translateY(-5px); border-color: rgba(56, 189, 248, 0.4); }
-        .card-img { height: 170px; background-size: cover; background-position: center; }
-        .card-content { padding: 1.2rem; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
-        .tag {
-            display: inline-block;
-            background-color: rgba(56, 189, 248, 0.12);
-            color: var(--accent-color);
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            margin-bottom: 10px;
-            font-weight: bold;
-        }
-        .card-title { font-size: 1.2rem; margin-bottom: 8px; color: var(--text-color); }
-        .card-text { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.2rem; }
-        .card-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-color); padding-top: 0.8rem; }
-        .btn {
-            background-color: var(--accent-color);
-            color: #070913;
-            padding: 7px 15px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 0.85rem;
-            border: none;
-            cursor: pointer;
-        }
-        .btn:hover { background-color: var(--accent-hover); }
-        .action-icons { display: flex; gap: 12px; color: var(--text-muted); cursor: pointer; }
-        .liked { color: var(--danger) !important; }
-        .saved { color: var(--accent-color) !important; }
 
-        /* Streams Section */
-        .streams-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.2rem; }
-        .stream-card { background: var(--card-bg); border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); cursor: pointer; }
-        .stream-thumb { height: 140px; background-size: cover; background-position: center; position: relative; }
-        .live-badge {
-            position: absolute; top: 10px; left: 10px;
-            background: var(--live-red); color: white; padding: 3px 8px;
-            border-radius: 4px; font-size: 0.75rem; font-weight: bold;
-            display: flex; align-items: center; gap: 4px;
-        }
-        .live-badge::before { content: ''; width: 7px; height: 7px; background: white; border-radius: 50%; animation: pulse 1.5s infinite; }
-        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
-
-        /* Codes Section */
-        .codes-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.2rem; }
-        .code-card { background: var(--card-bg); border: 1px dashed var(--accent-color); padding: 1.2rem; border-radius: 12px; display: flex; flex-direction: column; gap: 8px; }
-        .code-box { background: #070913; padding: 8px 12px; border-radius: 6px; font-family: monospace; color: var(--accent-color); font-size: 1rem; display: flex; justify-content: space-between; align-items: center; }
-        .copy-btn { background: var(--accent-color); color: #070913; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 0.75rem; }
-
-        /* Modals */
+        /* User Profile & Dashboard Modals */
         .modal {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.85); justify-content: center; align-items: center; z-index: 2000; padding: 1rem;
+            display: none;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(5, 7, 15, 0.85); backdrop-filter: blur(10px);
+            justify-content: center; align-items: center; z-index: 2000; padding: 1rem;
         }
-        .modal-content {
-            background: var(--card-bg); padding: 2rem; border-radius: 16px; width: 100%; max-width: 420px;
-            border: 1px solid var(--border-color); text-align: center; position: relative; max-height: 90vh; overflow-y: auto;
+        .modal-box {
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 20px;
+            width: 100%; max-width: 450px;
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.2);
+            text-align: center;
+            position: relative;
+            max-height: 90vh; overflow-y: auto;
         }
-        .modal-content input { width: 100%; padding: 11px; margin: 10px 0; background: #070913; border: 1px solid var(--border-color); border-radius: 8px; color: white; }
-        .close-modal { position: absolute; top: 15px; left: 15px; color: var(--text-muted); cursor: pointer; font-size: 1.2rem; }
+        .modal-box input {
+            width: 100%; padding: 12px; margin: 10px 0;
+            background: #05070f; border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px; color: #fff; font-size: 1rem;
+        }
+        .close-btn {
+            position: absolute; top: 15px; left: 15px;
+            color: var(--text-muted); cursor: pointer; font-size: 1.3rem;
+        }
+        .stats-badge-container {
+            display: flex; justify-content: space-around;
+            background: #05070f; padding: 15px; border-radius: 12px;
+            margin: 15px 0; border: 1px solid rgba(255,255,255,0.05);
+        }
+        .stat-item h3 { color: var(--accent-neon); font-size: 1.3rem; }
+        .stat-item p { color: var(--text-muted); font-size: 0.8rem; }
 
-        footer { text-align: center; padding: 2rem; background-color: #04060c; color: var(--text-muted); border-top: 1px solid var(--border-color); margin-top: 3rem; font-size: 0.9rem; }
+        footer {
+            text-align: center;
+            padding: 3rem;
+            background-color: #030408;
+            color: var(--text-muted);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: 4rem;
+        }
     </style>
 </head>
 <body>
@@ -185,99 +368,111 @@
     <!-- Header -->
     <header>
         <div class="logo" onclick="window.scrollTo(0,0)">
-            🎮 CINER <span>Games</span>
+            🎮 CINER <span>GAMES</span>
         </div>
         <nav>
             <a href="#home">الرئيسية</a>
-            <a href="#news">الأخبار</a>
             <a href="#streams">البثوط الحية</a>
-            <a href="#codes">الأكواد والجوائز</a>
-            <a href="#leaks">التسريبات</a>
+            <a href="#news">الأخبار</a>
+            <a href="#rewards">الجوائز والأكواد</a>
+            <a href="#trading">التداول والأسواق</a>
         </nav>
-        <div class="user-nav-area">
-            <button class="btn-auth" id="authBtn" onclick="openAuthModal()">تسجيل دخول</button>
-            <div id="userProfileChip" style="display: none; align-items: center; gap: 8px; cursor: pointer;" onclick="openProfileModal()">
-                <img id="navUserAvatar" src="" style="width: 35px; height: 35px; border-radius: 50%; border: 2px solid var(--accent-color); object-fit: cover;">
-                <span id="navUserName" style="font-weight: bold; font-size: 0.9rem; color: var(--accent-color);"></span>
+        <div class="user-action-area">
+            <button class="btn-glow" id="authBtn" onclick="openAuthModal()">تسجيل حساب</button>
+            <div id="userChip" style="display: none; align-items: center; gap: 10px; cursor: pointer;" onclick="openProfileModal()">
+                <img id="navAvatar" src="" style="width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--accent-neon); object-fit: cover;">
+                <span id="navName" style="font-weight: bold; color: var(--accent-neon);"></span>
             </div>
         </div>
     </header>
 
     <!-- Hero -->
     <div class="hero" id="home">
-        <h1>المنصة الاحترافية للألعاب والبثوث الحية</h1>
-        <p>تابع أحدث أخبار الألعاب العالمية، البثوط الحية للبطولات (ببجي، فورتنايت، كول اوف ديوتي، وغيرها)، وأكواد الجوائز الرقمية.</p>
-        <a href="#streams" class="btn" style="padding: 10px 22px; font-size: 1rem;">شاهد البثوث الحية الآن</a>
+        <h1>المنصة الذكية للألعاب والبثوط الحية والجوائز</h1>
+        <p>تصفح البثوط الحية الحقيقية (يوتيوب، تويتش، كيك، والتداول)، اجمع الساعات والنقاط، واحصل على جوائز رقمية فورية!</p>
+        <a href="#streams" class="btn-glow" style="display: inline-block; text-decoration: none; padding: 12px 30px;">استكشف البثوط الآن</a>
     </div>
 
-    <!-- Live Streams Section (Real YouTube Streams) -->
+    <!-- Streams Section (Multi-Platform: YouTube, Twitch, Kick, Trading) -->
     <div class="container" id="streams">
-        <h2 class="section-title">البثوط الحية والبطولات الرسمية</h2>
-        <div class="streams-grid">
-            <div class="stream-card" onclick="openStreamModal('PUBG Mobile Official Live', 'https://www.youtube.com/embed/live_stream?channel=UCqR5y7V6Y0z7gN1j5wF3b6A')">
-                <div class="stream-thumb" style="background-image: url('https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=500&q=80');">
-                    <div class="live-badge">مباشر الآن</div>
+        <h2 class="section-title">البثوط الحية العالمية الحقيقية</h2>
+        
+        <div class="stream-tabs">
+            <button class="tab-btn active" onclick="filterStreams('all', this)">الكل</button>
+            <button class="tab-btn" onclick="filterStreams('youtube', this)">بثوث يوتيوب 🔴</button>
+            <button class="tab-btn" onclick="filterStreams('twitch', this)">بثوث تويتش 🟣</button>
+            <button class="tab-btn" onclick="filterStreams('kick', this)">بثوث كيك 🟢</button>
+            <button class="tab-btn" onclick="filterStreams('trading', this)">أسواق وتداول 📈</button>
+        </div>
+
+        <div class="streams-grid" id="streamsGrid">
+            <!-- YouTube Stream -->
+            <div class="stream-card" data-category="youtube" onclick="openStreamPlayer('بث بطولة PUBG Mobile الرسمية', 'https://www.youtube.com/embed/live_stream?channel=UCqR5y7V6Y0z7gN1j5wF3b6A')">
+                <div class="stream-thumb" style="background-image: url('https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=600&q=80');">
+                    <div class="live-tag">يوتيوب مباشر</div>
                 </div>
-                <div style="padding: 1rem;">
-                    <span class="tag">PUBG Mobile</span>
-                    <h4 style="font-size: 1rem; margin-bottom: 5px;">البث الرسمي لبطولات ببجي موبايل</h4>
-                    <p style="color: var(--text-muted); font-size: 0.8rem;">بث حي للبطولات والمواجهات الكبرى</p>
+                <div style="padding: 1.2rem;">
+                    <span class="badge">PUBG Mobile</span>
+                    <h4 style="color: #fff; margin-bottom: 5px;">بطولة العالم الرسمية لببجي موبايل</h4>
+                    <p style="color: var(--text-muted); font-size: 0.85rem;">بث حي بدقة عالية مع توزيع جوائز للمشاهدين</p>
                 </div>
             </div>
 
-            <div class="stream-card" onclick="openStreamModal('Fortnite Live Stream', 'https://www.youtube.com/embed/live_stream?channel=UCrZ3Q95u481K69pX4rEaK_g')">
-                <div class="stream-thumb" style="background-image: url('https://images.unsplash.com/photo-1589241062272-c0a000071dfa?auto=format&fit=crop&w=500&q=80');">
-                    <div class="live-badge">مباشر الآن</div>
+            <!-- Twitch Stream -->
+            <div class="stream-card" data-category="twitch" onclick="openStreamPlayer('بث بطولة Fortnite المحترفين - Twitch', 'https://player.twitch.tv/?channel=fortnite&parent=laythaziz.github.io')">
+                <div class="stream-thumb" style="background-image: url('https://images.unsplash.com/photo-1589241062272-c0a000071dfa?auto=format&fit=crop&w=600&q=80');">
+                    <div class="live-tag" style="background: #9146FF;">تويتش مباشر</div>
                 </div>
-                <div style="padding: 1rem;">
-                    <span class="tag">Fortnite</span>
-                    <h4 style="font-size: 1rem; margin-bottom: 5px;">بطولات فورتنايت وموسم الأحداث</h4>
-                    <p style="color: var(--text-muted); font-size: 0.8rem;">متابعة تفصيلية لمباريات المحترفين</p>
-                </div>
-            </div>
-
-            <div class="stream-card" onclick="openStreamModal('Call of Duty Live', 'https://www.youtube.com/embed/live_stream?channel=UCb8sujnVvKz58Wq4wKqQdFg')">
-                <div class="stream-thumb" style="background-image: url('https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=500&q=80');">
-                    <div class="live-badge">مباشر الآن</div>
-                </div>
-                <div style="padding: 1rem;">
-                    <span class="tag">Call of Duty / Warzone</span>
-                    <h4 style="font-size: 1rem; margin-bottom: 5px;">بطولات وارزون وكول اوف ديوتي</h4>
-                    <p style="color: var(--text-muted); font-size: 0.8rem;">أقوى المواجهات الحية والتنافسية</p>
+                <div style="padding: 1.2rem;">
+                    <span class="badge" style="background: rgba(145,70,255,0.15); color: #b78cff;">Fortnite</span>
+                    <h4 style="color: #fff; margin-bottom: 5px;">نهائيات كأس فورتنايت العالمية</h4>
+                    <p style="color: var(--text-muted); font-size: 0.85rem;">مواجهات حماسية مباشرة من تويتش</p>
                 </div>
             </div>
 
-            <div class="stream-card" onclick="openStreamModal('CS2 / CS:GO ESL Live', 'https://www.youtube.com/embed/live_stream?channel=UCPq2W4xYp7j_rQx5w2j9A5A')">
-                <div class="stream-thumb" style="background-image: url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=500&q=80');">
-                    <div class="live-badge">مباشر الآن</div>
+            <!-- Kick Stream -->
+            <div class="stream-card" data-category="kick" onclick="openStreamPlayer('بث مباشر منصة كيك - Kick Gaming', 'https://player.kick.com/xqc')">
+                <div class="stream-thumb" style="background-image: url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=600&q=80');">
+                    <div class="live-tag" style="background: #53fc18; color: #000;">كيك مباشر</div>
                 </div>
-                <div style="padding: 1rem;">
-                    <span class="tag">CS:GO & CS2</span>
-                    <h4 style="font-size: 1rem; margin-bottom: 5px;">بطولات ESL الكبرى لـ CS2</h4>
-                    <p style="color: var(--text-muted); font-size: 0.8rem;">بث مباشر لنهائيات العالم</p>
+                <div style="padding: 1.2rem;">
+                    <span class="badge" style="background: rgba(83,252,24,0.15); color: #53fc18;">Kick Live</span>
+                    <h4 style="color: #fff; margin-bottom: 5px;">بث ألعاب منوعة وتحديات كبرى</h4>
+                    <p style="color: var(--text-muted); font-size: 0.85rem;">أبرز السترمرز على منصة Kick</p>
+                </div>
+            </div>
+
+            <!-- Trading Stream -->
+            <div class="stream-card" data-category="trading" onclick="openStreamPlayer('تحليل الأسواق المالية وتداول العملات الحية', 'https://www.youtube.com/embed/live_stream?channel=UCWlSUhsfnWv9UjDuuL2X77Q')">
+                <div class="stream-thumb" style="background-image: url('https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=600&q=80');">
+                    <div class="live-tag" style="background: #00ff66; color: #000;">تداول مباشر</div>
+                </div>
+                <div style="padding: 1.2rem;">
+                    <span class="badge" style="background: rgba(0,255,102,0.15); color: #00ff66;">Financial Markets</span>
+                    <h4 style="color: #fff; margin-bottom: 5px;">تحليل الأسواق والعملات الرقمية الحية</h4>
+                    <p style="color: var(--text-muted); font-size: 0.85rem;">متابعة أسعار البورصة والأسواق العالمية</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- News Section with Real Gaming Images -->
+    <!-- News Section -->
     <div class="container" id="news">
-        <h2 class="section-title">أحدث المقالات والأخبار الحصرية</h2>
-        
+        <h2 class="section-title">أحدث أخبار الألعاب التقنية</h2>
         <div class="grid">
             <div class="card">
                 <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1542751110-97427bbecf20?auto=format&fit=crop&w=600&q=80');"></div>
-                <div class="card-content">
+                <div class="card-body">
                     <div>
-                        <span class="tag">GTA VI</span>
-                        <h3 class="card-title">التفاصيل المؤكدة وقصة لوسيا في GTA VI</h3>
-                        <p class="card-text">أحدث ما نشرته روكستار حول خريطة اللعبة وتفاصيل الجرافيكس الثوري.</p>
+                        <span class="badge">GTA VI</span>
+                        <h3 class="card-title">تفاصيل جديدة حول آليات الذكاء الاصطناعي في GTA VI</h3>
+                        <p class="card-text">استعراض أحدث تقارير روكستار حول سلوك الشخصيات الافتراضية في العالم المفتوح.</p>
                     </div>
                     <div class="card-footer">
-                        <button class="btn" onclick="alert('جاري فتح المقال...')">اقرأ المقال</button>
-                        <div class="action-icons">
-                            <span onclick="toggleLike(this)">❤️ <span>412</span></span>
-                            <span onclick="toggleSave(this, 'التفاصيل المؤكدة وقصة لوسيا في GTA VI')">⭐</span>
+                        <button class="btn-card" onclick="alert('جاري فتح المقال...')">قراءة التفاصيل</button>
+                        <div class="actions">
+                            <span onclick="toggleLike(this)">❤️ <span>512</span></span>
+                            <span onclick="toggleSave(this, 'تفاصيل جديدة حول آليات الذكاء الاصطناعي في GTA VI')">⭐</span>
                         </div>
                     </div>
                 </div>
@@ -285,35 +480,17 @@
 
             <div class="card">
                 <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=600&q=80');"></div>
-                <div class="card-content">
+                <div class="card-body">
                     <div>
-                        <span class="tag">Minecraft & Rocket League</span>
-                        <h3 class="card-title">تحديثات ضخمة في ماينكرفات وموسم روكيت ليك</h3>
-                        <p class="card-text">استعراض المزايا البرمجية والإضافات الجديدة لعوالم البناء والسيارات.</p>
+                        <span class="badge">Minecraft & Valorant</span>
+                        <h3 class="card-title">تحديثات ضخمة لخوادم اللعب وسكنات فالورانت الحصرية</h3>
+                        <p class="card-text">أبرز الإضافات البرمجية والخرائط الجديدة المنتظرة هذا الشهر.</p>
                     </div>
                     <div class="card-footer">
-                        <button class="btn" onclick="alert('جاري فتح المقال...')">اقرأ المقال</button>
-                        <div class="action-icons">
-                            <span onclick="toggleLike(this)">❤️ <span>285</span></span>
-                            <span onclick="toggleSave(this, 'تحديثات ضخمة في ماينكرفات وموسم روكيت ليك')">⭐</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=600&q=80');"></div>
-                <div class="card-content">
-                    <div>
-                        <span class="tag">DOOM & Delta Force</span>
-                        <h3 class="card-title">مراجعة أسلوب الأكشن في DOOM ودلتا فورس</h3>
-                        <p class="card-text">تحليل تجربة اللعب الجماعي وسرعة الإطار في أحدث إصدارات الأكشن.</p>
-                    </div>
-                    <div class="card-footer">
-                        <button class="btn" onclick="alert('جاري فتح المقال...')">اقرأ المقال</button>
-                        <div class="action-icons">
-                            <span onclick="toggleLike(this)">❤️ <span>190</span></span>
-                            <span onclick="toggleSave(this, 'مراجعة أسلوب الأكشن في DOOM ودلتا فورس')">⭐</span>
+                        <button class="btn-card" onclick="alert('جاري فتح المقال...')">قراءة التفاصيل</button>
+                        <div class="actions">
+                            <span onclick="toggleLike(this)">❤️ <span>324</span></span>
+                            <span onclick="toggleSave(this, 'تحديثات ضخمة لخوادم اللعب وسكنات فالورانت الحصرية')">⭐</span>
                         </div>
                     </div>
                 </div>
@@ -321,24 +498,27 @@
         </div>
     </div>
 
-    <!-- Codes Section -->
-    <div class="container" id="codes">
-        <h2 class="section-title">أكواد الجوائز الرقمية الفعّالة</h2>
-        <div class="codes-grid">
-            <div class="code-card">
-                <span class="tag">PUBG Mobile</span>
-                <h4>شدات ولباس أسطوري مجاني</h4>
-                <div class="code-box">
-                    <span id="c1">CINER-PUBG-2026</span>
-                    <button class="copy-btn" onclick="copyCode('c1', this)">نسخ</button>
+    <!-- Rewards & Digital Codes Section -->
+    <div class="container" id="rewards">
+        <h2 class="section-title">الجوائز الرقمية وأكواد الشحن الفردية</h2>
+        <div class="rewards-grid">
+            <div class="reward-card">
+                <span class="badge">PUBG Mobile VIP</span>
+                <h4>كود شحن شدات 660 UC</h4>
+                <p style="color: var(--text-muted); font-size: 0.85rem;">متاحة للأعضاء الذين أمضوا أكثر من ساعتين تصفح.</p>
+                <div class="reward-code-box">
+                    <span id="rc1">CINER-UC-660-VIP</span>
+                    <button class="btn-card" onclick="claimReward('CINER-UC-660-VIP', 10)">استلام</button>
                 </div>
             </div>
-            <div class="code-card">
-                <span class="tag">Fortnite / Roblox</span>
-                <h4>جفت كارد روبوكس وفري في</h4>
-                <div class="code-box">
-                    <span id="c2">CINER-FN-GIFT</span>
-                    <button class="copy-btn" onclick="copyCode('c2', this)">نسخ</button>
+
+            <div class="reward-card">
+                <span class="badge">Roblox / Fortnite</span>
+                <h4>بطاقة هدايا روبوكس / فري في</h4>
+                <p style="color: var(--text-muted); font-size: 0.85rem;">هدية ترحيبية للمستخدمين الجدد.</p>
+                <div class="reward-code-box">
+                    <span id="rc2">CINER-GIFT-2026</span>
+                    <button class="btn-card" onclick="claimReward('CINER-GIFT-2026', 15)">استلام</button>
                 </div>
             </div>
         </div>
@@ -346,92 +526,116 @@
 
     <!-- Auth Modal (Login / Register & Email Verification) -->
     <div class="modal" id="authModal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeAuthModal()">✕</span>
-            <h3 id="authTitle" style="color: var(--accent-color); margin-bottom: 10px;">إنشاء حساب جديد</h3>
-            <p id="authSubtitle" style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 15px;">سجل بريدك الإلكتروني وكلمة المرور لتفعيل حسابك</p>
-            
+        <div class="modal-box">
+            <span class="close-btn" onclick="closeAuthModal()">✕</span>
+            <h3 id="authTitle" style="color: var(--accent-neon); margin-bottom: 10px;">انضم إلى CINER Games</h3>
+            <p id="authSubtitle" style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 15px;">أنشئ حسابك الخاص لتتبع ساعاتك ونقاطك</p>
+
             <div id="registerForm">
                 <input type="text" id="regName" placeholder="اسم المستخدم...">
                 <input type="email" id="regEmail" placeholder="البريد الإلكتروني...">
                 <input type="password" id="regPass" placeholder="كلمة المرور...">
-                <button class="btn" style="width: 100%; padding: 11px; margin-top: 10px;" onclick="handleRegister()">إرسال رمز التفعيل للإيميل</button>
-                <p style="margin-top: 12px; font-size: 0.85rem; color: var(--text-muted);">لديك حساب مسبق؟ <span style="color: var(--accent-color); cursor: pointer;" onclick="switchAuthMode('login')">تسجيل الدخول</span></p>
+                <button class="btn-glow" style="width: 100%; margin-top: 10px; padding: 12px;" onclick="handleRegister()">إرسال رمز التفعيل</button>
+                <p style="margin-top: 12px; font-size: 0.85rem; color: var(--text-muted);">لديك حساب مسبق؟ <span style="color: var(--accent-neon); cursor: pointer;" onclick="switchAuth('login')">تسجيل الدخول</span></p>
             </div>
 
             <div id="verifyForm" style="display: none;">
-                <p style="color: var(--success); font-size: 0.85rem; margin-bottom: 10px;">✉️ تم إرسال رسالة تفعيل إلى إيميلك. أدخل الرمز:</p>
-                <input type="text" id="verifyCode" value="8842" style="text-align: center; letter-spacing: 4px; font-weight: bold;">
-                <button class="btn" style="width: 100%; padding: 11px;" onclick="handleVerify()">تفعيل الحساب والدخول</button>
+                <p style="color: var(--success); font-size: 0.85rem; margin-bottom: 10px;">✉️ تم إرسال رسالة تفعيل وهمية إلى بريدك. أدخل الرمز:</p>
+                <input type="text" id="verifyCode" value="7719" style="text-align: center; letter-spacing: 5px; font-weight: bold;">
+                <button class="btn-glow" style="width: 100%; padding: 12px;" onclick="handleVerify()">تفعيل الحساب والدخول</button>
             </div>
 
             <div id="loginForm" style="display: none;">
                 <input type="email" id="loginEmail" placeholder="البريد الإلكتروني...">
                 <input type="password" id="loginPass" placeholder="كلمة المرور...">
-                <button class="btn" style="width: 100%; padding: 11px; margin-top: 10px;" onclick="handleLogin()">تسجيل الدخول</button>
-                <p style="margin-top: 12px; font-size: 0.85rem; color: var(--text-muted);">ليس لديك حساب؟ <span style="color: var(--accent-color); cursor: pointer;" onclick="switchAuthMode('register')">أنشئ حساباً جديداً</span></p>
+                <button class="btn-glow" style="width: 100%; margin-top: 10px; padding: 12px;" onclick="handleLogin()">تسجيل الدخول</button>
+                <p style="margin-top: 12px; font-size: 0.85rem; color: var(--text-muted);">ليس لديك حساب؟ <span style="color: var(--accent-neon); cursor: pointer;" onclick="switchAuth('register')">أنشئ حساباً جديداً</span></p>
             </div>
         </div>
     </div>
 
-    <!-- Profile Modal (User Dashboard & Avatar Upload) -->
+    <!-- Profile Dashboard Modal -->
     <div class="modal" id="profileModal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeProfileModal()">✕</span>
-            <div style="position: relative; width: 80px; height: 80px; margin: 0 auto 10px auto;">
-                <img id="profileModalAvatar" src="" style="width: 80px; height: 80px; border-radius: 50%; border: 3px solid var(--accent-color); object-fit: cover;">
-                <label for="uploadAvatarInput" style="position: absolute; bottom: 0; right: 0; background: var(--accent-color); color: #070913; border-radius: 50%; width: 26px; height: 26px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 0.8rem;" title="تغيير الصورة">📷</label>
-                <input type="file" id="uploadAvatarInput" accept="image/*" style="display: none;" onchange="handleImageUpload(event)">
+        <div class="modal-box">
+            <span class="close-btn" onclick="closeProfileModal()">✕</span>
+            <div style="position: relative; width: 85px; height: 85px; margin: 0 auto 10px auto;">
+                <img id="profileAvatar" src="" style="width: 85px; height: 85px; border-radius: 50%; border: 3px solid var(--accent-neon); object-fit: cover;">
+                <label for="uploadAv" style="position: absolute; bottom: 0; right: 0; background: var(--accent-neon); color: #05070f; border-radius: 50%; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 0.8rem;">📷</label>
+                <input type="file" id="uploadAv" accept="image/*" style="display: none;" onchange="uploadAvatar(event)">
             </div>
-            <h3 id="profileModalName" style="color: var(--text-color);"></h3>
-            <p id="profileModalEmail" style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 15px;"></p>
-            
-            <div style="background: #070913; padding: 12px; border-radius: 10px; text-align: right; margin-bottom: 15px;">
-                <h4 style="font-size: 0.9rem; color: var(--accent-color); margin-bottom: 5px;">⭐ المقالات المفضلة لديك:</h4>
-                <ul id="savedArticlesList" style="list-style: none; font-size: 0.85rem; color: var(--text-muted); max-height: 120px; overflow-y: auto;"></ul>
+            <h3 id="profileName" style="color: #fff;"></h3>
+            <p id="profileEmail" style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 15px;"></p>
+
+            <div class="stats-badge-container">
+                <div class="stat-item">
+                    <h3 id="statHours">0</h3>
+                    <p>ساعات الموقع</p>
+                </div>
+                <div class="stat-item">
+                    <h3 id="statPoints">0</h3>
+                    <p>نقاط الولاء</p>
+                </div>
             </div>
 
-            <button class="btn" style="background: var(--danger); color: white; width: 100%; padding: 10px;" onclick="handleLogout()">تسجيل الخروج</button>
+            <div style="background: #05070f; padding: 12px; border-radius: 10px; text-align: right; margin-bottom: 15px; border: 1px solid rgba(255,255,255,0.05);">
+                <h4 style="font-size: 0.9rem; color: var(--accent-neon); margin-bottom: 5px;">⭐ المقالات المفضلة لديك:</h4>
+                <ul id="profileSavedList" style="list-style: none; font-size: 0.85rem; color: var(--text-muted); max-height: 100px; overflow-y: auto;"></ul>
+            </div>
+
+            <button class="btn-glow" style="background: var(--danger); color: #fff; width: 100%; box-shadow: 0 0 15px rgba(255,0,85,0.3);" onclick="logout()">تسجيل الخروج</button>
         </div>
     </div>
 
     <!-- Stream Player Modal -->
     <div class="modal" id="streamModal">
-        <div class="modal-content" style="max-width: 750px; padding: 1rem;">
-            <span class="close-modal" onclick="closeStreamModal()">✕</span>
-            <h3 id="streamTitle" style="color: var(--accent-color); margin-bottom: 10px; font-size: 1.1rem;"></h3>
-            <div style="position: relative; width: 100%; padding-bottom: 56.25%; background: #000; border-radius: 10px; overflow: hidden;">
+        <div class="modal-box" style="max-width: 800px; padding: 1rem;">
+            <span class="close-btn" onclick="closeStreamModal()">✕</span>
+            <h3 id="streamModalTitle" style="color: var(--accent-neon); margin-bottom: 10px; font-size: 1.1rem;"></h3>
+            <div style="position: relative; width: 100%; padding-bottom: 56.25%; background: #000; border-radius: 12px; overflow: hidden; border: 1px solid rgba(0,240,255,0.2);">
                 <iframe id="streamIframe" src="" style="position: absolute; top:0; left:0; width:100%; height:100%; border:0;" allowfullscreen></iframe>
             </div>
         </div>
     </div>
 
     <footer>
-        <p>&copy; 2026 CINER Games. جميع الحقوق محفوظة لشبكة ألعاب وتصميم ليث عزيز.</p>
+        <p>&copy; 2026 CINER Games. منصة الألعاب والترفيه المتكاملة بتصميم وتطوير ليث عزيز.</p>
     </footer>
 
     <script>
-        let currentUser = JSON.parse(localStorage.getItem('ciner_logged_user')) || null;
+        // User State Management
+        let currentUser = JSON.parse(localStorage.getItem('ciner_pro_user')) || null;
 
-        window.onload = function() { checkAuthUI(); }
+        // Auto increment session hours and points for active user
+        setInterval(() => {
+            if(currentUser) {
+                currentUser.minutes = (currentUser.minutes || 0) + 1;
+                currentUser.hours = (currentUser.minutes / 60).toFixed(1);
+                currentUser.points = (currentUser.points || 0) + 1;
+                localStorage.setItem('ciner_pro_user', JSON.stringify(currentUser));
+            }
+        }, 60000); // كل دقيقة تزيد نقاط وساعات
 
-        function checkAuthUI() {
+        window.onload = function() {
+            updateUI();
+        }
+
+        function updateUI() {
             if(currentUser) {
                 document.getElementById('authBtn').style.display = 'none';
-                const chip = document.getElementById('userProfileChip');
+                const chip = document.getElementById('userChip');
                 chip.style.display = 'flex';
-                document.getElementById('navUserName').innerText = currentUser.name;
-                document.getElementById('navUserAvatar').src = currentUser.avatar || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&q=80';
+                document.getElementById('navName').innerText = currentUser.name;
+                document.getElementById('navAvatar').src = currentUser.avatar || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&q=80';
             } else {
                 document.getElementById('authBtn').style.display = 'block';
-                document.getElementById('userProfileChip').style.display = 'none';
+                document.getElementById('userChip').style.display = 'none';
             }
         }
 
         function openAuthModal() { document.getElementById('authModal').style.display = 'flex'; }
         function closeAuthModal() { document.getElementById('authModal').style.display = 'none'; }
 
-        function switchAuthMode(mode) {
+        function switchAuth(mode) {
             if(mode === 'login') {
                 document.getElementById('registerForm').style.display = 'none';
                 document.getElementById('verifyForm').style.display = 'none';
@@ -441,47 +645,49 @@
                 document.getElementById('registerForm').style.display = 'block';
                 document.getElementById('verifyForm').style.display = 'none';
                 document.getElementById('loginForm').style.display = 'none';
-                document.getElementById('authTitle').innerText = 'إنشاء حساب جديد';
+                document.getElementById('authTitle').innerText = 'انضم إلى CINER Games';
             }
         }
 
-        let pendingUser = null;
+        let tempUser = null;
         function handleRegister() {
             const name = document.getElementById('regName').value;
             const email = document.getElementById('regEmail').value;
             const pass = document.getElementById('regPass').value;
-            if(!name || !email || !pass) { alert('الرجاء تعبئة كافة الحقول'); return; }
-            pendingUser = { name, email, pass, avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&q=80', saved: [] };
+            if(!name || !email || !pass) { alert('املأ جميع الحقول من فضلك'); return; }
+            tempUser = { name, email, pass, avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&q=80', hours: 0.5, points: 50, saved: [], minutes: 30 };
             document.getElementById('registerForm').style.display = 'none';
             document.getElementById('verifyForm').style.display = 'block';
         }
 
         function handleVerify() {
-            currentUser = pendingUser;
-            localStorage.setItem('ciner_logged_user', JSON.stringify(currentUser));
+            currentUser = tempUser;
+            localStorage.setItem('ciner_pro_user', JSON.stringify(currentUser));
             closeAuthModal();
-            checkAuthUI();
-            alert('🎉 تم تفعيل الحساب وتسجيل الدخول بنجاح!');
+            updateUI();
+            alert('🎉 تم تفعيل الحساب وحصلت على 50 نقطة هدية ترحيبية!');
         }
 
         function handleLogin() {
             const email = document.getElementById('loginEmail').value;
             const pass = document.getElementById('loginPass').value;
-            if(!email || !pass) { alert('أدخل البريد وكلمة المرور'); return; }
-            currentUser = { name: email.split('@')[0], email, avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&q=80', saved: [] };
-            localStorage.setItem('ciner_logged_user', JSON.stringify(currentUser));
+            if(!email || !pass) { alert('أدخل بيانات الدخول'); return; }
+            currentUser = { name: email.split('@')[0], email, avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&q=80', hours: 2.5, points: 120, saved: [], minutes: 150 };
+            localStorage.setItem('ciner_pro_user', JSON.stringify(currentUser));
             closeAuthModal();
-            checkAuthUI();
-            alert('مرحباً بك مجدداً!');
+            updateUI();
+            alert('مرحباً بك مجدداً في بروفايلك!');
         }
 
         function openProfileModal() {
             if(!currentUser) return;
-            document.getElementById('profileModalAvatar').src = currentUser.avatar || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&q=80';
-            document.getElementById('profileModalName').innerText = currentUser.name;
-            document.getElementById('profileModalEmail').innerText = currentUser.email;
+            document.getElementById('profileAvatar').src = currentUser.avatar;
+            document.getElementById('profileName').innerText = currentUser.name;
+            document.getElementById('profileEmail').innerText = currentUser.email;
+            document.getElementById('statHours').innerText = currentUser.hours || 1.0;
+            document.getElementById('statPoints').innerText = currentUser.points || 100;
 
-            const list = document.getElementById('savedArticlesList');
+            const list = document.getElementById('profileSavedList');
             list.innerHTML = '';
             if(currentUser.saved && currentUser.saved.length > 0) {
                 currentUser.saved.forEach(item => {
@@ -499,65 +705,81 @@
         }
         function closeProfileModal() { document.getElementById('profileModal').style.display = 'none'; }
 
-        function handleImageUpload(event) {
+        function uploadAvatar(event) {
             const file = event.target.files[0];
             if(file) {
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     currentUser.avatar = e.target.result;
-                    localStorage.setItem('ciner_logged_user', JSON.stringify(currentUser));
-                    document.getElementById('navUserAvatar').src = currentUser.avatar;
-                    document.getElementById('profileModalAvatar').src = currentUser.avatar;
-                    alert('تم تحديث صورة البروفايل بنجاح!');
+                    localStorage.setItem('ciner_pro_user', JSON.stringify(currentUser));
+                    document.getElementById('navAvatar').src = currentUser.avatar;
+                    document.getElementById('profileAvatar').src = currentUser.avatar;
+                    alert('تم تحديث صورتك الشخصية بنجاح!');
                 }
                 reader.readAsDataURL(file);
             }
         }
 
-        function handleLogout() {
-            localStorage.removeItem('ciner_logged_user');
+        function logout() {
+            localStorage.removeItem('ciner_pro_user');
             currentUser = null;
             closeProfileModal();
-            checkAuthUI();
+            updateUI();
             alert('تم تسجيل الخروج.');
         }
 
-        function toggleLike(element) {
-            element.classList.toggle('liked');
-            let countSpan = element.querySelector('span');
-            let count = parseInt(countSpan.innerText);
-            countSpan.innerText = element.classList.contains('liked') ? count + 1 : count - 1;
-        }
-
-        function toggleSave(element, articleTitle) {
-            if(!currentUser) { alert('سجل دخولك أولاً لحفظ المقالات!'); openAuthModal(); return; }
-            element.classList.toggle('saved');
-            if(element.classList.contains('saved')) {
-                if(!currentUser.saved.includes(articleTitle)) currentUser.saved.push(articleTitle);
-                alert('تمت إضافة المقال إلى مفضلتك!');
-            } else {
-                currentUser.saved = currentUser.saved.filter(t => t !== articleTitle);
-                alert('تم إزالة المقال من المفضلة.');
-            }
-            localStorage.setItem('ciner_logged_user', JSON.stringify(currentUser));
-        }
-
-        function copyCode(elementId, btn) {
-            const codeText = document.getElementById(elementId).innerText;
-            navigator.clipboard.writeText(codeText).then(() => {
-                btn.innerText = 'تم النسخ ✅';
-                setTimeout(() => { btn.innerText = 'نسخ'; }, 2000);
+        function filterStreams(category, btn) {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const cards = document.querySelectorAll('.stream-card');
+            cards.forEach(card => {
+                if(category === 'all' || card.getAttribute('data-category') === category) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
             });
         }
 
-        function openStreamModal(title, url) {
-            document.getElementById('streamTitle').innerText = '🔴 ' + title;
+        function openStreamPlayer(title, url) {
+            document.getElementById('streamModalTitle').innerText = '🔴 ' + title;
             document.getElementById('streamIframe').src = url;
             document.getElementById('streamModal').style.display = 'flex';
         }
         function closeStreamModal() {
             document.getElementById('streamModal').style.display = 'none';
             document.getElementById('streamIframe').src = '';
+        }
+
+        function toggleLike(element) {
+            element.classList.toggle('liked');
+            let span = element.querySelector('span');
+            let count = parseInt(span.innerText);
+            span.innerText = element.classList.contains('liked') ? count + 1 : count - 1;
+        }
+
+        function toggleSave(element, title) {
+            if(!currentUser) { alert('سجل دخولك أولاً لحفظ المقالات في بروفايلك!'); openAuthModal(); return; }
+            element.classList.toggle('saved');
+            if(element.classList.contains('saved')) {
+                if(!currentUser.saved.includes(title)) currentUser.saved.push(title);
+                alert('تمت إضافة المقال لمفضلتك!');
+            } else {
+                currentUser.saved = currentUser.saved.filter(t => t !== title);
+                alert('تم إزالة المقال من المفضلة.');
+            }
+            localStorage.setItem('ciner_pro_user', JSON.stringify(currentUser));
+        }
+
+        function claimReward(code, pointsCost) {
+            if(!currentUser) { alert('يجب تسجيل الدخول لاستلام الجوائز الرقمية!'); openAuthModal(); return; }
+            if(currentUser.points >= pointsCost) {
+                currentUser.points -= pointsCost;
+                localStorage.setItem('ciner_pro_user', JSON.stringify(currentUser));
+                alert('🎁 تهانينا! الكود الخاص بك هو: ' + code + '\nتم خصم ' + pointsCost + ' نقطة من رصيدك.');
+            } else {
+                alert('عذراً، نقاطك غير كافية (' + currentUser.points + '). تصفح الموقع أكثر لجمع النقاط!');
+            }
         }
     </script>
 </body>
