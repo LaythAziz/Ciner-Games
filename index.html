@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CINER Games - المنصة الاحترافية للألعاب والبثوث</title>
+    <title>CINER Games - المنصة الاحترافية للألعاب والبثوث الحية</title>
     <style>
         :root {
             --bg-color: #070913;
@@ -29,7 +29,6 @@
             color: var(--text-color);
             line-height: 1.6;
         }
-        /* Header & Nav */
         header {
             background: rgba(7, 9, 19, 0.95);
             backdrop-filter: blur(12px);
@@ -51,9 +50,7 @@
             align-items: center;
             gap: 8px;
         }
-        .logo span {
-            color: var(--text-color);
-        }
+        .logo span { color: var(--text-color); }
         nav {
             display: flex;
             align-items: center;
@@ -65,15 +62,12 @@
         nav a {
             color: var(--text-muted);
             text-decoration: none;
-            transition: color 0.3s, transform 0.2s;
+            transition: color 0.3s;
             font-weight: 600;
             font-size: 0.9rem;
             white-space: nowrap;
         }
-        nav a:hover {
-            color: var(--accent-color);
-            transform: translateY(-2px);
-        }
+        nav a:hover { color: var(--accent-color); }
         .user-nav-area {
             display: flex;
             align-items: center;
@@ -88,83 +82,41 @@
             font-weight: bold;
             cursor: pointer;
             font-size: 0.85rem;
-            transition: transform 0.2s, opacity 0.2s;
             white-space: nowrap;
         }
-        .btn-auth:hover { opacity: 0.9; transform: scale(1.03); }
-
-        /* Hero Banner */
         .hero {
             text-align: center;
             padding: 4rem 1rem;
-            background: linear-gradient(rgba(7, 9, 19, 0.75), rgba(7, 9, 19, 0.95)), url('https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1200&q=80') center/cover;
+            background: linear-gradient(rgba(7, 9, 19, 0.75), rgba(7, 9, 19, 0.95)), url('https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=1200&q=80') center/cover;
             border-bottom: 1px solid var(--border-color);
         }
-        .hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: var(--text-color);
-            text-shadow: 0 4px 15px rgba(0,0,0,0.6);
-        }
-        .hero p {
-            font-size: 1.1rem;
-            color: var(--text-muted);
-            max-width: 650px;
-            margin: 0 auto 1.5rem auto;
-        }
-
-        /* Container & Grid */
-        .container {
-            max-width: 1200px;
-            margin: 2.5rem auto;
-            padding: 0 1rem;
-        }
+        .hero h1 { font-size: 2.5rem; margin-bottom: 1rem; color: var(--text-color); }
+        .hero p { font-size: 1.1rem; color: var(--text-muted); max-width: 650px; margin: 0 auto 1.5rem auto; }
+        .container { max-width: 1200px; margin: 2.5rem auto; padding: 0 1rem; }
         .section-title {
             font-size: 1.6rem;
             margin-bottom: 1.5rem;
             border-right: 4px solid var(--accent-color);
             padding-right: 12px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
         }
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 1.5rem;
         }
-
-        /* Cards */
         .card {
             background-color: var(--card-bg);
             border-radius: 14px;
             overflow: hidden;
             border: 1px solid var(--border-color);
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            transition: transform 0.3s;
         }
-        .card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 12px 25px rgba(56, 189, 248, 0.12);
-            border-color: rgba(56, 189, 248, 0.3);
-        }
-        .card-img {
-            height: 170px;
-            background-size: cover;
-            background-position: center;
-            transition: transform 0.5s;
-            position: relative;
-        }
-        .card:hover .card-img { transform: scale(1.04); }
-        .card-content {
-            padding: 1.2rem;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
+        .card:hover { transform: translateY(-5px); border-color: rgba(56, 189, 248, 0.4); }
+        .card-img { height: 170px; background-size: cover; background-position: center; }
+        .card-content { padding: 1.2rem; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
         .tag {
             display: inline-block;
             background-color: rgba(56, 189, 248, 0.12);
@@ -175,23 +127,9 @@
             margin-bottom: 10px;
             font-weight: bold;
         }
-        .card-title {
-            font-size: 1.2rem;
-            margin-bottom: 8px;
-            color: var(--text-color);
-        }
-        .card-text {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            margin-bottom: 1.2rem;
-        }
-        .card-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-top: 1px solid var(--border-color);
-            padding-top: 0.8rem;
-        }
+        .card-title { font-size: 1.2rem; margin-bottom: 8px; color: var(--text-color); }
+        .card-text { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.2rem; }
+        .card-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-color); padding-top: 0.8rem; }
         .btn {
             background-color: var(--accent-color);
             color: #070913;
@@ -200,165 +138,46 @@
             text-decoration: none;
             font-weight: bold;
             font-size: 0.85rem;
-            transition: background 0.3s, transform 0.2s;
             border: none;
             cursor: pointer;
         }
-        .btn:hover { background-color: var(--accent-hover); transform: scale(1.03); }
-        .action-icons {
-            display: flex;
-            gap: 12px;
-            color: var(--text-muted);
-            cursor: pointer;
-            font-size: 0.95rem;
-        }
-        .action-icons span:hover { color: var(--accent-color); }
+        .btn:hover { background-color: var(--accent-hover); }
+        .action-icons { display: flex; gap: 12px; color: var(--text-muted); cursor: pointer; }
         .liked { color: var(--danger) !important; }
         .saved { color: var(--accent-color) !important; }
 
         /* Streams Section */
-        .streams-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 1.2rem;
-        }
-        .stream-card {
-            background: var(--card-bg);
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid var(--border-color);
-            position: relative;
-        }
-        .stream-thumb {
-            height: 140px;
-            background-size: cover;
-            background-position: center;
-            position: relative;
-        }
+        .streams-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.2rem; }
+        .stream-card { background: var(--card-bg); border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); cursor: pointer; }
+        .stream-thumb { height: 140px; background-size: cover; background-position: center; position: relative; }
         .live-badge {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            background: var(--live-red);
-            color: white;
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 4px;
+            position: absolute; top: 10px; left: 10px;
+            background: var(--live-red); color: white; padding: 3px 8px;
+            border-radius: 4px; font-size: 0.75rem; font-weight: bold;
+            display: flex; align-items: center; gap: 4px;
         }
-        .live-badge::before {
-            content: '';
-            width: 7px;
-            height: 7px;
-            background: white;
-            border-radius: 50%;
-            animation: pulse 1.5s infinite;
-        }
+        .live-badge::before { content: ''; width: 7px; height: 7px; background: white; border-radius: 50%; animation: pulse 1.5s infinite; }
         @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
 
         /* Codes Section */
-        .codes-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 1.2rem;
-        }
-        .code-card {
-            background: var(--card-bg);
-            border: 1px dashed var(--accent-color);
-            padding: 1.2rem;
-            border-radius: 12px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-        .code-box {
-            background: #070913;
-            padding: 8px 12px;
-            border-radius: 6px;
-            font-family: monospace;
-            color: var(--accent-color);
-            font-size: 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .copy-btn {
-            background: var(--accent-color);
-            color: #070913;
-            border: none;
-            padding: 4px 8px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 0.75rem;
-        }
+        .codes-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.2rem; }
+        .code-card { background: var(--card-bg); border: 1px dashed var(--accent-color); padding: 1.2rem; border-radius: 12px; display: flex; flex-direction: column; gap: 8px; }
+        .code-box { background: #070913; padding: 8px 12px; border-radius: 6px; font-family: monospace; color: var(--accent-color); font-size: 1rem; display: flex; justify-content: space-between; align-items: center; }
+        .copy-btn { background: var(--accent-color); color: #070913; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 0.75rem; }
 
-        /* Modals (Auth & Profile) */
+        /* Modals */
         .modal {
-            display: none;
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0,0,0,0.85);
-            justify-content: center;
-            align-items: center;
-            z-index: 2000;
-            padding: 1rem;
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85); justify-content: center; align-items: center; z-index: 2000; padding: 1rem;
         }
         .modal-content {
-            background: var(--card-bg);
-            padding: 2rem;
-            border-radius: 16px;
-            width: 100%;
-            max-width: 420px;
-            border: 1px solid var(--border-color);
-            text-align: center;
-            position: relative;
+            background: var(--card-bg); padding: 2rem; border-radius: 16px; width: 100%; max-width: 420px;
+            border: 1px solid var(--border-color); text-align: center; position: relative; max-height: 90vh; overflow-y: auto;
         }
-        .modal-content input, .modal-content select {
-            width: 100%;
-            padding: 11px;
-            margin: 10px 0;
-            background: #070913;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            color: white;
-            font-size: 0.95rem;
-        }
-        .close-modal {
-            position: absolute;
-            top: 15px; left: 15px;
-            color: var(--text-muted);
-            cursor: pointer;
-            font-size: 1.2rem;
-        }
-        .avatar-picker {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin: 15px 0;
-        }
-        .avatar-option {
-            width: 45px; height: 45px;
-            border-radius: 50%;
-            cursor: pointer;
-            border: 2px solid transparent;
-            object-fit: cover;
-        }
-        .avatar-option.selected { border-color: var(--accent-color); }
+        .modal-content input { width: 100%; padding: 11px; margin: 10px 0; background: #070913; border: 1px solid var(--border-color); border-radius: 8px; color: white; }
+        .close-modal { position: absolute; top: 15px; left: 15px; color: var(--text-muted); cursor: pointer; font-size: 1.2rem; }
 
-        footer {
-            text-align: center;
-            padding: 2rem;
-            background-color: #04060c;
-            color: var(--text-muted);
-            border-top: 1px solid var(--border-color);
-            margin-top: 3rem;
-            font-size: 0.9rem;
-        }
+        footer { text-align: center; padding: 2rem; background-color: #04060c; color: var(--text-muted); border-top: 1px solid var(--border-color); margin-top: 3rem; font-size: 0.9rem; }
     </style>
 </head>
 <body>
@@ -376,7 +195,7 @@
             <a href="#leaks">التسريبات</a>
         </nav>
         <div class="user-nav-area">
-            <button class="btn-auth" id="authBtn" onclick="openAuthModal()">تسجيل / حساب جديد</button>
+            <button class="btn-auth" id="authBtn" onclick="openAuthModal()">تسجيل دخول</button>
             <div id="userProfileChip" style="display: none; align-items: center; gap: 8px; cursor: pointer;" onclick="openProfileModal()">
                 <img id="navUserAvatar" src="" style="width: 35px; height: 35px; border-radius: 50%; border: 2px solid var(--accent-color); object-fit: cover;">
                 <span id="navUserName" style="font-weight: bold; font-size: 0.9rem; color: var(--accent-color);"></span>
@@ -386,137 +205,115 @@
 
     <!-- Hero -->
     <div class="hero" id="home">
-        <h1>المنصة الاحترافية الأولى للألعاب</h1>
-        <p>تابع أحدث أخبار ألعاب البلايستيشن والـ PC والهواتف، البثوط الحية للبطولات العالمية، وأكواد الهدايا الرقمية الحصرية.</p>
-        <a href="#news" class="btn" style="padding: 10px 22px; font-size: 1rem;">تصفح المنصة الآن</a>
+        <h1>المنصة الاحترافية للألعاب والبثوث الحية</h1>
+        <p>تابع أحدث أخبار الألعاب العالمية، البثوط الحية للبطولات (ببجي، فورتنايت، كول اوف ديوتي، وغيرها)، وأكواد الجوائز الرقمية.</p>
+        <a href="#streams" class="btn" style="padding: 10px 22px; font-size: 1rem;">شاهد البثوث الحية الآن</a>
     </div>
 
-    <!-- Live Streams Section -->
+    <!-- Live Streams Section (Real YouTube Streams) -->
     <div class="container" id="streams">
-        <h2 class="section-title"><span>البثوط الحية والبطولات العالمية</span></h2>
+        <h2 class="section-title">البثوط الحية والبطولات الرسمية</h2>
         <div class="streams-grid">
-            <div class="stream-card" onclick="openStreamModal('PUBG Mobile Pro League', 'https://www.youtube.com/embed/live_stream?channel=PUBGMOBILE')">
+            <div class="stream-card" onclick="openStreamModal('PUBG Mobile Official Live', 'https://www.youtube.com/embed/live_stream?channel=UCqR5y7V6Y0z7gN1j5wF3b6A')">
                 <div class="stream-thumb" style="background-image: url('https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=500&q=80');">
                     <div class="live-badge">مباشر الآن</div>
                 </div>
                 <div style="padding: 1rem;">
                     <span class="tag">PUBG Mobile</span>
-                    <h4 style="font-size: 1rem; margin-bottom: 5px;">بطولة العالم للشرق الأوسط PMPL</h4>
-                    <p style="color: var(--text-muted); font-size: 0.8rem;">مشاهدة رسمية بجودة عالية مع توزيع جوائز وشدات</p>
+                    <h4 style="font-size: 1rem; margin-bottom: 5px;">البث الرسمي لبطولات ببجي موبايل</h4>
+                    <p style="color: var(--text-muted); font-size: 0.8rem;">بث حي للبطولات والمواجهات الكبرى</p>
                 </div>
             </div>
 
-            <div class="stream-card" onclick="openStreamModal('Fortnite FNCS Championship', 'https://www.youtube.com/embed/live_stream?channel=Fortnite')">
+            <div class="stream-card" onclick="openStreamModal('Fortnite Live Stream', 'https://www.youtube.com/embed/live_stream?channel=UCrZ3Q95u481K69pX4rEaK_g')">
                 <div class="stream-thumb" style="background-image: url('https://images.unsplash.com/photo-1589241062272-c0a000071dfa?auto=format&fit=crop&w=500&q=80');">
                     <div class="live-badge">مباشر الآن</div>
                 </div>
                 <div style="padding: 1rem;">
                     <span class="tag">Fortnite</span>
-                    <h4 style="font-size: 1rem; margin-bottom: 5px;">بطولة FNCS الكبرى - نهائيات الموسم</h4>
-                    <p style="color: var(--text-muted); font-size: 0.8rem;">تتبع أقوى المواجهات والمباريات الحية</p>
+                    <h4 style="font-size: 1rem; margin-bottom: 5px;">بطولات فورتنايت وموسم الأحداث</h4>
+                    <p style="color: var(--text-muted); font-size: 0.8rem;">متابعة تفصيلية لمباريات المحترفين</p>
                 </div>
             </div>
 
-            <div class="stream-card" onclick="openStreamModal('Rocket League Championship Series', 'https://www.youtube.com/embed/live_stream?channel=RocketLeague')">
-                <div class="stream-thumb" style="background-image: url('https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=500&q=80');">
+            <div class="stream-card" onclick="openStreamModal('Call of Duty Live', 'https://www.youtube.com/embed/live_stream?channel=UCb8sujnVvKz58Wq4wKqQdFg')">
+                <div class="stream-thumb" style="background-image: url('https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=500&q=80');">
                     <div class="live-badge">مباشر الآن</div>
                 </div>
                 <div style="padding: 1rem;">
-                    <span class="tag">Rocket League</span>
-                    <h4 style="font-size: 1rem; margin-bottom: 5px;">بطولة RLCS العالمية للسيارات</h4>
-                    <p style="color: var(--text-muted); font-size: 0.8rem;">مباريات حماسية واحترافية مباشرة</p>
+                    <span class="tag">Call of Duty / Warzone</span>
+                    <h4 style="font-size: 1rem; margin-bottom: 5px;">بطولات وارزون وكول اوف ديوتي</h4>
+                    <p style="color: var(--text-muted); font-size: 0.8rem;">أقوى المواجهات الحية والتنافسية</p>
                 </div>
             </div>
 
-            <div class="stream-card" onclick="openStreamModal('CS:GO / CS2 Major', 'https://www.youtube.com/embed/live_stream?channel=ESLCS')">
+            <div class="stream-card" onclick="openStreamModal('CS2 / CS:GO ESL Live', 'https://www.youtube.com/embed/live_stream?channel=UCPq2W4xYp7j_rQx5w2j9A5A')">
                 <div class="stream-thumb" style="background-image: url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=500&q=80');">
                     <div class="live-badge">مباشر الآن</div>
                 </div>
                 <div style="padding: 1rem;">
-                    <span class="tag">CS:GO / CS2</span>
-                    <h4 style="font-size: 1rem; margin-bottom: 5px;">بطولة ESL Pro League الكبرى</h4>
-                    <p style="color: var(--text-muted); font-size: 0.8rem;">مواجهات شرسة بين أفضل فرق العالم</p>
+                    <span class="tag">CS:GO & CS2</span>
+                    <h4 style="font-size: 1rem; margin-bottom: 5px;">بطولات ESL الكبرى لـ CS2</h4>
+                    <p style="color: var(--text-muted); font-size: 0.8rem;">بث مباشر لنهائيات العالم</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- News & Articles Section -->
+    <!-- News Section with Real Gaming Images -->
     <div class="container" id="news">
-        <h2 class="section-title"><span>أحدث المقالات والأخبار الحصرية</span></h2>
+        <h2 class="section-title">أحدث المقالات والأخبار الحصرية</h2>
         
         <div class="grid">
-            <!-- Article 1 -->
-            <div class="card">
-                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=600&q=80');"></div>
-                <div class="card-content">
-                    <div>
-                        <span class="tag">GTA VI</span>
-                        <h3 class="card-title">كل التفاصيل الرسمية والتسريبات المؤكدة لخريطة GTA VI</h3>
-                        <p class="card-text">استعراض أحدث تقارير روكستار حول عالم اللعبة، آليات الذكاء الاصطناعي، وموعد الإصدار النهائي.</p>
-                    </div>
-                    <div class="card-footer">
-                        <button class="btn" onclick="alert('جاري تحميل المقال كاملاً...')">اقرأ المقال</button>
-                        <div class="action-icons">
-                            <span onclick="toggleLike(this)">❤️ <span>342</span></span>
-                            <span onclick="toggleSave(this, 'كل التفاصيل الرسمية والتسريبات المؤكدة لخريطة GTA VI')">⭐</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Article 2 -->
-            <div class="card">
-                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=600&q=80');"></div>
-                <div class="card-content">
-                    <div>
-                        <span class="tag">Call of Duty</span>
-                        <h3 class="card-title">إعلان موعد إطلاق جزء Call of Duty الجديد كلياً</h3>
-                        <p class="card-text">تعرف على قصة اللعبة في طور الحكاية، خريطة الـ Warzone الجديدة، والأسلحة القادمة.</p>
-                    </div>
-                    <div class="card-footer">
-                        <button class="btn" onclick="alert('جاري تحميل المقال كاملاً...')">اقرأ المقال</button>
-                        <div class="action-icons">
-                            <span onclick="toggleLike(this)">❤️ <span>215</span></span>
-                            <span onclick="toggleSave(this, 'إعلان موعد إطلاق جزء Call of Duty الجديد كلياً')">⭐</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Article 3 -->
             <div class="card">
                 <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1542751110-97427bbecf20?auto=format&fit=crop&w=600&q=80');"></div>
                 <div class="card-content">
                     <div>
-                        <span class="tag">Minecraft & Delta Force</span>
-                        <h3 class="card-title">تحديثات ضخمة قادمة لعوالب ماينكرفات ولعبة دلتا فورس</h3>
-                        <p class="card-text">أبرز الإضافات البرمجية، المطورون يكشفون عن مميزات الجرافيكس المحسّن وخوادم اللعب الجماعي.</p>
+                        <span class="tag">GTA VI</span>
+                        <h3 class="card-title">التفاصيل المؤكدة وقصة لوسيا في GTA VI</h3>
+                        <p class="card-text">أحدث ما نشرته روكستار حول خريطة اللعبة وتفاصيل الجرافيكس الثوري.</p>
                     </div>
                     <div class="card-footer">
-                        <button class="btn" onclick="alert('جاري تحميل المقال كاملاً...')">اقرأ المقال</button>
+                        <button class="btn" onclick="alert('جاري فتح المقال...')">اقرأ المقال</button>
                         <div class="action-icons">
-                            <span onclick="toggleLike(this)">❤️ <span>189</span></span>
-                            <span onclick="toggleSave(this, 'تحديثات ضخمة قادمة لعوالم ماينكرفات ولعبة دلتا فورس')">⭐</span>
+                            <span onclick="toggleLike(this)">❤️ <span>412</span></span>
+                            <span onclick="toggleSave(this, 'التفاصيل المؤكدة وقصة لوسيا في GTA VI')">⭐</span>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Article 4 -->
             <div class="card">
                 <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=600&q=80');"></div>
                 <div class="card-content">
                     <div>
-                        <span class="tag">DOOM & Valorant</span>
-                        <h3 class="card-title">مراجعة شاملة لجزئية الأكشن السريع في DOOM وأسلحة فالورانت</h3>
-                        <p class="card-text">تحليل أسلوب اللعب، السرعة، والخرائط التكتيكية الجديدة المضافة للعبة.</p>
+                        <span class="tag">Minecraft & Rocket League</span>
+                        <h3 class="card-title">تحديثات ضخمة في ماينكرفات وموسم روكيت ليك</h3>
+                        <p class="card-text">استعراض المزايا البرمجية والإضافات الجديدة لعوالم البناء والسيارات.</p>
                     </div>
                     <div class="card-footer">
-                        <button class="btn" onclick="alert('جاري تحميل المقال كاملاً...')">اقرأ المقال</button>
+                        <button class="btn" onclick="alert('جاري فتح المقال...')">اقرأ المقال</button>
                         <div class="action-icons">
-                            <span onclick="toggleLike(this)">❤️ <span>120</span></span>
-                            <span onclick="toggleSave(this, 'مراجعة شاملة لجزئية الأكشن السريع في DOOM وأسلحة فالورانت')">⭐</span>
+                            <span onclick="toggleLike(this)">❤️ <span>285</span></span>
+                            <span onclick="toggleSave(this, 'تحديثات ضخمة في ماينكرفات وموسم روكيت ليك')">⭐</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=600&q=80');"></div>
+                <div class="card-content">
+                    <div>
+                        <span class="tag">DOOM & Delta Force</span>
+                        <h3 class="card-title">مراجعة أسلوب الأكشن في DOOM ودلتا فورس</h3>
+                        <p class="card-text">تحليل تجربة اللعب الجماعي وسرعة الإطار في أحدث إصدارات الأكشن.</p>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn" onclick="alert('جاري فتح المقال...')">اقرأ المقال</button>
+                        <div class="action-icons">
+                            <span onclick="toggleLike(this)">❤️ <span>190</span></span>
+                            <span onclick="toggleSave(this, 'مراجعة أسلوب الأكشن في DOOM ودلتا فورس')">⭐</span>
                         </div>
                     </div>
                 </div>
@@ -524,97 +321,47 @@
         </div>
     </div>
 
-    <!-- Codes & Digital Rewards Section -->
+    <!-- Codes Section -->
     <div class="container" id="codes">
-        <h2 class="section-title"><span>أكواد الجوائز الرقمية والشدات الفعّالة</span></h2>
-        
+        <h2 class="section-title">أكواد الجوائز الرقمية الفعّالة</h2>
         <div class="codes-grid">
             <div class="code-card">
                 <span class="tag">PUBG Mobile</span>
-                <h4>شحن شدات ولباس أسطوري مجاني</h4>
+                <h4>شدات ولباس أسطوري مجاني</h4>
                 <div class="code-box">
                     <span id="c1">CINER-PUBG-2026</span>
                     <button class="copy-btn" onclick="copyCode('c1', this)">نسخ</button>
                 </div>
             </div>
-
             <div class="code-card">
-                <span class="tag">Roblox / Fortnite</span>
-                <h4>أكواد روبوكس وفري في جفت كارد</h4>
+                <span class="tag">Fortnite / Roblox</span>
+                <h4>جفت كارد روبوكس وفري في</h4>
                 <div class="code-box">
                     <span id="c2">CINER-FN-GIFT</span>
                     <button class="copy-btn" onclick="copyCode('c2', this)">نسخ</button>
                 </div>
             </div>
-
-            <div class="code-card">
-                <span class="tag">Valorant / CS:GO</span>
-                <h4>سكنات أسلحة ونقاط مجانية</h4>
-                <div class="code-box">
-                    <span id="c3">VAL-CS-REWARD</span>
-                    <button class="copy-btn" onclick="copyCode('c3', this)">نسخ</button>
-                </div>
-            </div>
-
-            <div class="code-card">
-                <span class="tag">Rocket League</span>
-                <h4>سيارات وعجلات حصرية متميزة</h4>
-                <div class="code-box">
-                    <span id="c4">RL-CINER-VIP</span>
-                    <button class="copy-btn" onclick="copyCode('c4', this)">نسخ</button>
-                </div>
-            </div>
         </div>
     </div>
 
-    <!-- Leaks Section -->
-    <div class="container" id="leaks">
-        <h2 class="section-title"><span>التسريبات القادمة</span></h2>
-        <div class="grid">
-            <div class="card">
-                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1612287233002-ef2f8149e19d?auto=format&fit=crop&w=600&q=80');"></div>
-                <div class="card-content">
-                    <div>
-                        <span class="tag">PlayStation 6</span>
-                        <h3 class="card-title">تسريبات مواصفات عتاد الجيل القادم من سوني</h3>
-                        <p class="card-text">تفاصيل معمارية المعالج الرسومي وموعد طرح المنصة الأولية بالأسواق.</p>
-                    </div>
-                    <div class="card-footer">
-                        <button class="btn" onclick="alert('عرض التسريبات...')">التفاصيل</button>
-                        <div class="action-icons">
-                            <span onclick="toggleLike(this)">❤️ <span>95</span></span>
-                            <span onclick="toggleSave(this, 'تسريبات مواصفات عتاد الجيل القادم من سوني')">⭐</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Auth Modal (Login / Register / Email Verification) -->
+    <!-- Auth Modal (Login / Register & Email Verification) -->
     <div class="modal" id="authModal">
         <div class="modal-content">
             <span class="close-modal" onclick="closeAuthModal()">✕</span>
-            <h3 id="authTitle" style="margin-bottom: 10px; color: var(--accent-color);">إنشاء حساب جديد في CINER</h3>
+            <h3 id="authTitle" style="color: var(--accent-color); margin-bottom: 10px;">إنشاء حساب جديد</h3>
             <p id="authSubtitle" style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 15px;">سجل بريدك الإلكتروني وكلمة المرور لتفعيل حسابك</p>
             
             <div id="registerForm">
                 <input type="text" id="regName" placeholder="اسم المستخدم...">
-                <input type="email" id="regEmail" placeholder="البريد الإلكتروني (الرسمي)...">
-                <input type="password" id="regPass" placeholder="كلمة المرور الحسينية / السرية...">
-                <div style="text-align: right; margin: 10px 0; font-size: 0.85rem; color: var(--text-muted);">اختر صورتك الرمزية:</div>
-                <div class="avatar-picker" id="avatarPicker">
-                    <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&q=80" class="avatar-option selected" onclick="selectAvatar(this)">
-                    <img src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?auto=format&fit=crop&w=100&q=80" class="avatar-option" onclick="selectAvatar(this)">
-                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80" class="avatar-option" onclick="selectAvatar(this)">
-                </div>
+                <input type="email" id="regEmail" placeholder="البريد الإلكتروني...">
+                <input type="password" id="regPass" placeholder="كلمة المرور...">
                 <button class="btn" style="width: 100%; padding: 11px; margin-top: 10px;" onclick="handleRegister()">إرسال رمز التفعيل للإيميل</button>
-                <p style="margin-top: 15px; font-size: 0.85rem; color: var(--text-muted);">لديك حساب مسبق؟ <span style="color: var(--accent-color); cursor: pointer;" onclick="switchAuthMode('login')">تسجيل الدخول</span></p>
+                <p style="margin-top: 12px; font-size: 0.85rem; color: var(--text-muted);">لديك حساب مسبق؟ <span style="color: var(--accent-color); cursor: pointer;" onclick="switchAuthMode('login')">تسجيل الدخول</span></p>
             </div>
 
             <div id="verifyForm" style="display: none;">
-                <p style="color: var(--success); font-size: 0.9rem; margin-bottom: 15px;">✉️ تم إرسال رسالة تفعيل وهمية إلى بريدك الإلكتروني! أدخل الرمز (أو اضغط تأكيد):</p>
-                <input type="text" id="verifyCode" value="8842" style="text-align: center; letter-spacing: 5px; font-weight: bold;" placeholder="رمز التفعيل">
+                <p style="color: var(--success); font-size: 0.85rem; margin-bottom: 10px;">✉️ تم إرسال رسالة تفعيل إلى إيميلك. أدخل الرمز:</p>
+                <input type="text" id="verifyCode" value="8842" style="text-align: center; letter-spacing: 4px; font-weight: bold;">
                 <button class="btn" style="width: 100%; padding: 11px;" onclick="handleVerify()">تفعيل الحساب والدخول</button>
             </div>
 
@@ -622,24 +369,26 @@
                 <input type="email" id="loginEmail" placeholder="البريد الإلكتروني...">
                 <input type="password" id="loginPass" placeholder="كلمة المرور...">
                 <button class="btn" style="width: 100%; padding: 11px; margin-top: 10px;" onclick="handleLogin()">تسجيل الدخول</button>
-                <p style="margin-top: 15px; font-size: 0.85rem; color: var(--text-muted);">ليس لديك حساب؟ <span style="color: var(--accent-color); cursor: pointer;" onclick="switchAuthMode('register')">انشئ حساباً جديداً</span></p>
+                <p style="margin-top: 12px; font-size: 0.85rem; color: var(--text-muted);">ليس لديك حساب؟ <span style="color: var(--accent-color); cursor: pointer;" onclick="switchAuthMode('register')">أنشئ حساباً جديداً</span></p>
             </div>
         </div>
     </div>
 
-    <!-- Profile Modal (User Dashboard) -->
+    <!-- Profile Modal (User Dashboard & Avatar Upload) -->
     <div class="modal" id="profileModal">
         <div class="modal-content">
             <span class="close-modal" onclick="closeProfileModal()">✕</span>
-            <img id="profileModalAvatar" src="" style="width: 80px; height: 80px; border-radius: 50%; border: 3px solid var(--accent-color); object-fit: cover; margin-bottom: 10px;">
+            <div style="position: relative; width: 80px; height: 80px; margin: 0 auto 10px auto;">
+                <img id="profileModalAvatar" src="" style="width: 80px; height: 80px; border-radius: 50%; border: 3px solid var(--accent-color); object-fit: cover;">
+                <label for="uploadAvatarInput" style="position: absolute; bottom: 0; right: 0; background: var(--accent-color); color: #070913; border-radius: 50%; width: 26px; height: 26px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 0.8rem;" title="تغيير الصورة">📷</label>
+                <input type="file" id="uploadAvatarInput" accept="image/*" style="display: none;" onchange="handleImageUpload(event)">
+            </div>
             <h3 id="profileModalName" style="color: var(--text-color);"></h3>
             <p id="profileModalEmail" style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 15px;"></p>
             
             <div style="background: #070913; padding: 12px; border-radius: 10px; text-align: right; margin-bottom: 15px;">
-                <h4 style="font-size: 0.9rem; color: var(--accent-color); margin-bottom: 5px;">⭐ المقالات المحفوظة في المفضلة:</h4>
-                <ul id="savedArticlesList" style="list-style: none; font-size: 0.85rem; color: var(--text-muted); max-height: 120px; overflow-y: auto;">
-                    <!-- سيتم تعبئتها ديناميكياً -->
-                </ul>
+                <h4 style="font-size: 0.9rem; color: var(--accent-color); margin-bottom: 5px;">⭐ المقالات المفضلة لديك:</h4>
+                <ul id="savedArticlesList" style="list-style: none; font-size: 0.85rem; color: var(--text-muted); max-height: 120px; overflow-y: auto;"></ul>
             </div>
 
             <button class="btn" style="background: var(--danger); color: white; width: 100%; padding: 10px;" onclick="handleLogout()">تسجيل الخروج</button>
@@ -648,7 +397,7 @@
 
     <!-- Stream Player Modal -->
     <div class="modal" id="streamModal">
-        <div class="modal-content" style="max-width: 700px; padding: 1rem;">
+        <div class="modal-content" style="max-width: 750px; padding: 1rem;">
             <span class="close-modal" onclick="closeStreamModal()">✕</span>
             <h3 id="streamTitle" style="color: var(--accent-color); margin-bottom: 10px; font-size: 1.1rem;"></h3>
             <div style="position: relative; width: 100%; padding-bottom: 56.25%; background: #000; border-radius: 10px; overflow: hidden;">
@@ -662,12 +411,9 @@
     </footer>
 
     <script>
-        let selectedAvatarUrl = "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&q=80";
         let currentUser = JSON.parse(localStorage.getItem('ciner_logged_user')) || null;
 
-        window.onload = function() {
-            checkAuthUI();
-        }
+        window.onload = function() { checkAuthUI(); }
 
         function checkAuthUI() {
             if(currentUser) {
@@ -675,40 +421,28 @@
                 const chip = document.getElementById('userProfileChip');
                 chip.style.display = 'flex';
                 document.getElementById('navUserName').innerText = currentUser.name;
-                document.getElementById('navUserAvatar').src = currentUser.avatar || selectedAvatarUrl;
+                document.getElementById('navUserAvatar').src = currentUser.avatar || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&q=80';
             } else {
                 document.getElementById('authBtn').style.display = 'block';
                 document.getElementById('userProfileChip').style.display = 'none';
             }
         }
 
-        function openAuthModal() {
-            document.getElementById('authModal').style.display = 'flex';
-        }
-        function closeAuthModal() {
-            document.getElementById('authModal').style.display = 'none';
-        }
+        function openAuthModal() { document.getElementById('authModal').style.display = 'flex'; }
+        function closeAuthModal() { document.getElementById('authModal').style.display = 'none'; }
 
         function switchAuthMode(mode) {
             if(mode === 'login') {
                 document.getElementById('registerForm').style.display = 'none';
                 document.getElementById('verifyForm').style.display = 'none';
                 document.getElementById('loginForm').style.display = 'block';
-                document.getElementById('authTitle').innerText = 'تسجيل الدخول إلى CINER';
-                document.getElementById('authSubtitle').innerText = 'أدخل بريدك الإلكتروني وكلمة المرور';
+                document.getElementById('authTitle').innerText = 'تسجيل الدخول';
             } else {
                 document.getElementById('registerForm').style.display = 'block';
                 document.getElementById('verifyForm').style.display = 'none';
                 document.getElementById('loginForm').style.display = 'none';
-                document.getElementById('authTitle').innerText = 'إنشاء حساب جديد في CINER';
-                document.getElementById('authSubtitle').innerText = 'سجل بريدك الإلكتروني وكلمة المرور لتفعيل حسابك';
+                document.getElementById('authTitle').innerText = 'إنشاء حساب جديد';
             }
-        }
-
-        function selectAvatar(imgElement) {
-            document.querySelectorAll('.avatar-option').forEach(el => el.classList.remove('selected'));
-            imgElement.classList.add('selected');
-            selectedAvatarUrl = imgElement.src;
         }
 
         let pendingUser = null;
@@ -716,16 +450,10 @@
             const name = document.getElementById('regName').value;
             const email = document.getElementById('regEmail').value;
             const pass = document.getElementById('regPass').value;
-
-            if(!name || !email || !pass) {
-                alert('الرجاء تعبئة كافة الحقول المطلوبة');
-                return;
-            }
-
-            pendingUser = { name, email, pass, avatar: selectedAvatarUrl, saved: [] };
+            if(!name || !email || !pass) { alert('الرجاء تعبئة كافة الحقول'); return; }
+            pendingUser = { name, email, pass, avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&q=80', saved: [] };
             document.getElementById('registerForm').style.display = 'none';
             document.getElementById('verifyForm').style.display = 'block';
-            document.getElementById('authSubtitle').innerText = 'تحقق من بريدك الإلكتروني';
         }
 
         function handleVerify() {
@@ -739,21 +467,17 @@
         function handleLogin() {
             const email = document.getElementById('loginEmail').value;
             const pass = document.getElementById('loginPass').value;
-            if(!email || !pass) {
-                alert('الرجاء إدخال البريد وكلمة المرور');
-                return;
-            }
-            // محاكاة دخول ناجح
-            currentUser = { name: email.split('@')[0], email: email, avatar: selectedAvatarUrl, saved: [] };
+            if(!email || !pass) { alert('أدخل البريد وكلمة المرور'); return; }
+            currentUser = { name: email.split('@')[0], email, avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&q=80', saved: [] };
             localStorage.setItem('ciner_logged_user', JSON.stringify(currentUser));
             closeAuthModal();
             checkAuthUI();
-            alert('مرحباً بك مجدداً، تم تسجيل الدخول بنجاح!');
+            alert('مرحباً بك مجدداً!');
         }
 
         function openProfileModal() {
             if(!currentUser) return;
-            document.getElementById('profileModalAvatar').src = currentUser.avatar || selectedAvatarUrl;
+            document.getElementById('profileModalAvatar').src = currentUser.avatar || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&q=80';
             document.getElementById('profileModalName').innerText = currentUser.name;
             document.getElementById('profileModalEmail').innerText = currentUser.email;
 
@@ -768,15 +492,26 @@
                 });
             } else {
                 let li = document.createElement('li');
-                li.innerText = 'لا توجد مقالات محفوظة بعد. اضغط على ⭐ لحفظ أي مقال.';
+                li.innerText = 'لا توجد مقالات محفوظة.';
                 list.appendChild(li);
             }
-
-            document.getElementById('profileModalManager').style.display = 'flex'; // Fix modal id reference
             document.getElementById('profileModal').style.display = 'flex';
         }
-        function closeProfileModal() {
-            document.getElementById('profileModal').style.display = 'none';
+        function closeProfileModal() { document.getElementById('profileModal').style.display = 'none'; }
+
+        function handleImageUpload(event) {
+            const file = event.target.files[0];
+            if(file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    currentUser.avatar = e.target.result;
+                    localStorage.setItem('ciner_logged_user', JSON.stringify(currentUser));
+                    document.getElementById('navUserAvatar').src = currentUser.avatar;
+                    document.getElementById('profileModalAvatar').src = currentUser.avatar;
+                    alert('تم تحديث صورة البروفايل بنجاح!');
+                }
+                reader.readAsDataURL(file);
+            }
         }
 
         function handleLogout() {
@@ -784,7 +519,7 @@
             currentUser = null;
             closeProfileModal();
             checkAuthUI();
-            alert('تم تسجيل الخروج بنجاح.');
+            alert('تم تسجيل الخروج.');
         }
 
         function toggleLike(element) {
@@ -795,17 +530,11 @@
         }
 
         function toggleSave(element, articleTitle) {
-            if(!currentUser) {
-                alert('الرجاء تسجيل الدخول أولاً لحفظ المقالات في بروفايلك!');
-                openAuthModal();
-                return;
-            }
+            if(!currentUser) { alert('سجل دخولك أولاً لحفظ المقالات!'); openAuthModal(); return; }
             element.classList.toggle('saved');
             if(element.classList.contains('saved')) {
-                if(!currentUser.saved.includes(articleTitle)) {
-                    currentUser.saved.push(articleTitle);
-                }
-                alert('تمت إضافة المقال إلى المفضلة في بروفايلك بنجاح!');
+                if(!currentUser.saved.includes(articleTitle)) currentUser.saved.push(articleTitle);
+                alert('تمت إضافة المقال إلى مفضلتك!');
             } else {
                 currentUser.saved = currentUser.saved.filter(t => t !== articleTitle);
                 alert('تم إزالة المقال من المفضلة.');
@@ -816,20 +545,13 @@
         function copyCode(elementId, btn) {
             const codeText = document.getElementById(elementId).innerText;
             navigator.clipboard.writeText(codeText).then(() => {
-                const originalText = btn.innerText;
                 btn.innerText = 'تم النسخ ✅';
-                btn.style.background = '#22c55e';
-                btn.style.color = '#fff';
-                setTimeout(() => {
-                    btn.innerText = originalText;
-                    btn.style.background = 'var(--accent-color)';
-                    btn.style.color = '#070913';
-                }, 2000);
+                setTimeout(() => { btn.innerText = 'نسخ'; }, 2000);
             });
         }
 
         function openStreamModal(title, url) {
-            document.getElementById('streamTitle').innerText = '🔴 بث مباشر: ' + title;
+            document.getElementById('streamTitle').innerText = '🔴 ' + title;
             document.getElementById('streamIframe').src = url;
             document.getElementById('streamModal').style.display = 'flex';
         }
